@@ -1,5 +1,5 @@
 import { Directive, OnInit, ViewContainerRef, TemplateRef, Input } from '@angular/core';
-import { AbTestsService } from './service';
+import { AbTestsService } from './angular-ab-tests.service';
 
 @Directive({
   selector: '[abTestVersion]'

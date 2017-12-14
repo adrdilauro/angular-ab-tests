@@ -1,7 +1,8 @@
-import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR, AbTestsService } from './service';
-import { CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { AbTestVersionDirective } from './directive';
+import { AbTestsService } from './angular-ab-tests.service';
+import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './angular-ab-tests.injection-tokens';
+import { CookieHandler, CrawlerDetector, RandomExtractor } from './angular-ab-tests.classes';
+import { AbTestVersionDirective } from './angular-ab-tests.directive';
 
 export interface AbTestOptions {
   versions: string[];

@@ -1,4 +1,4 @@
-import { error } from './error';
+import { error } from './angular-ab-tests.error';
 
 export class AbTestForRealUser {
   private _versions: string[] = [];
