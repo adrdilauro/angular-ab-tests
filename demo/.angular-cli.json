@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "angular-ab-tests-demo"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "assets": [],
+      "index": "index.html",
+      "main": "main.ts",
+      "tsconfig": "tsconfig.app.json",
+      "prefix": "app",
+      "styles": [],
+      "scripts": [],
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+}
