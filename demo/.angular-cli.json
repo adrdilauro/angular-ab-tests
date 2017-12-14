@@ -9,15 +9,14 @@
       "assets": [],
       "index": "index.html",
       "main": "main.ts",
-      "tsconfig": "tsconfig.app.json",
-      "prefix": "app",
+      "tsconfig": "tsconfig.json",
       "styles": [],
-      "scripts": [],
+      "scripts": []
     }
   ],
   "test": {
     "karma": {
       "config": "./karma.conf.js"
     }
-  },
+  }
 }
