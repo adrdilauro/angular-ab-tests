@@ -51,7 +51,7 @@ Setup an A/B test including the module with `forRoot` method:
 })
 ```
 
-Wrap fragments of HTML inside the structural directive `abTestVersions`, marking them to belong to one or more of the versions of your A/B test.
+Wrap fragments of HTML inside the structural directive named `abTestVersions`, marking them to belong to one or more of the versions of your A/B test.
 
 ```html
 <ng-container *abTestVersion="'old'">
