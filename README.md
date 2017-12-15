@@ -27,7 +27,7 @@ Metti anche che change detection is removed completely!
 Nice syntax
 
 
-# Set up a demo
+# Setup a demo
 
 suggerisci how to play around
 
