@@ -9,8 +9,8 @@ It will **make your tests easy to debug and to understand**, regardless of how c
 - [Why this plugin is good for you](https://github.com/adrdilauro/angular-ab-tests#why-to-use-this-plugin)
 - [How to set up a quick demo to play around](https://github.com/adrdilauro/angular-ab-tests#setup-a-demo)
 - [Full documentation part 1: Initializing](https://github.com/adrdilauro/angular-ab-tests#documentation-1-initializing)
-- [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-1-usage)
-- [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation-1-tips)
+- [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage)
+- [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation-3-tips)
 
 
 # Features
