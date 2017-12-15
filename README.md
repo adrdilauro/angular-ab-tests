@@ -5,12 +5,12 @@ It will **make your tests easy to debug and to understand**, regardless of how c
 ### Contents
 
 - [List of features](https://github.com/adrdilauro/angular-ab-tests#features)
-- [Quick introduction to usage](https://github.com/adrdilauro/angular-ab-tests#usage)
-- [Why this plugin is good for you](https://github.com/adrdilauro/angular-ab-tests#why)
-- [How to set up a quick demo to play around](https://github.com/adrdilauro/angular-ab-tests#setup)
-- [Full documentation part 1: Initializing](https://github.com/adrdilauro/angular-ab-tests#documentation1)
-- [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation2)
-- [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation3)
+- [Quick introduction to usage](https://github.com/adrdilauro/angular-ab-tests#usage-in-short)
+- [Why this plugin is good for you](https://github.com/adrdilauro/angular-ab-tests#why-to-use-this-plugin)
+- [How to set up a quick demo to play around](https://github.com/adrdilauro/angular-ab-tests#setup-a-demo)
+- [Full documentation part 1: Initializing](https://github.com/adrdilauro/angular-ab-tests#documentation-1-initializing)
+- [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-1-usage)
+- [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation-1-tips)
 
 
 # Features
@@ -27,7 +27,7 @@ Metti anche che change detection is removed completely!
 Nice syntax
 
 
-# Set up the demo
+# Set up a demo
 
 suggerisci how to play around
 
