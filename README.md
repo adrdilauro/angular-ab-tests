@@ -67,10 +67,25 @@ Wrap fragments of HTML inside the structural directive named `abTestVersions`, m
 # Why to use this plugin
 
 
+You can create several different versions, as complex and as big as you need, without filling your HTML with unnecessary code. This will make your A/B test less error prone, and also it will make it easier to remove the loser versions after the test, because the code is clear and descriptive.
 
+Versions that are not selected are automatically removed from change detection at initialization, so no performance issues.
 
-Metti anche che change detection is removed completely!
-Nice syntax
+You can easily span your tests across different pages reading the same cookie, with no additional code.
+
+You can maintain as many different A/B tests you want without risking them to clash in the code.
+
+### What about simple A/B tests? Why should I use this plugin for a simple test as well?
+
+Usually, to set up a small A/B test (changing a color, removing or adding a div, etc) people use client side tools like Google Optimize.
+
+This approach can potentially affect user experience, because Google Optimize has to change parts of the page depending on the specific version selected, and, if this happens while the user is already looking at the page, we have the effect called "page flickering". To prevent page flickering Google Optimize introduced a "hide-page tag", i.e. a script that hides the page until the external call to Google Optimize server has responded.
+
+Now, usually Google Optimize tag loads fast, but you cannot always rely on external calls, especially in conditions of low network; in the worst scenario, if Google Optimize server doesn't respond, the hide-page tag gets unblocked after the threshold of 4 seconds.
+
+This means that, even if your server has responded in 150 milliseconds, your user won't be able to see anything in the page until the 4 seconds have expired.
+
+Are you sure you want to risk this? With AngularAbTests you can set up a simple A/B test easily and cleanly directly in the code, this means that you can get rid of the hide-page tag, and let Google Optimize focus only on data collection.
 
 
 # Setup a demo
