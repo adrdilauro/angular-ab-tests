@@ -17,8 +17,8 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 
 - Set up an A/B test with a **simple and descriptive code** (the module makes available just one simple structural directive)
 - A/B tests are valid across different pages, using cookies with the expiration you want
-- Test multiple versions with changes as complicated as you need, while still keeping the code clean and understandable
-- Effortlessly set up any number of separate A/B tests, being sure that they won't clash in the code
+- Test **multiple versions** with changes as complicated as you need, while still keeping the code clean and understandable
+- Effortlessly set up **any number of independent A/B tests**, being sure that they won't clash in the code
 - Select a special version for crawlers, so you won't affect your SEO while you are running the test
 
 
