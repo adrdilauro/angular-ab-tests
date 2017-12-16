@@ -13,8 +13,5 @@ export const abTestsOptions: AbTestOptions[] = [
   imports: [
     AbTestsModule.forRoot(abTestsOptions),
   ],
-  exports: [
-    AbTestsModule,
-  ],
 })
 export class TestsModule {}

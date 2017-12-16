@@ -132,9 +132,10 @@ I'll soon explain in detail (see [Documentation 2: Usage](https://github.com/adr
 
 ### Best practice for setting up AngularAbTests
 
-The best way to set up AngularAbTests is to include the `forRoot` call in your `CoreModule`: this is called the "forRoot pattern" (see [angular's official documentation](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) for details
+The best way to set up AngularAbTests is to include the `forRoot` call in your `CoreModule`, this is called the "forRoot pattern" (see [Angular's official documentation](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) for details: in a nutshell, when you need a service to be global under all circumstances, you cannot risk it to be included in modules that are lazy loaded, otherwise the lazy loaded module will be provided of a copy of the original service).
 
-scrivi brevemente il motivo deve essere servizio globale.
+
+metti esempio di codice con import e reexport. AZO ASSICURATI CHE RE-EXPIRT SERVA VERAMENTE CAZZO eventualmente toglilo da tests module; in core module non ce l'ho ma sì ce l'ho in tests module, è veramente necessario??
 
 scrivi che se il test è molto grande puoi rifattorizzarlo blabla e metti codice
 
