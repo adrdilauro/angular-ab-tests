@@ -24,7 +24,7 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 
 # Usage in short
 
-Add it to the list of dependencies using npm: [link to npm repo]
+Add it to the list of dependencies using npm: [link to npm repo] TODO
 
 ```
 npm install xxx # TODO
@@ -134,10 +134,60 @@ I'll soon explain in detail (see [Documentation 2: Usage](https://github.com/adr
 
 The best way to set up AngularAbTests is to include the `forRoot` call in your `CoreModule`, this is called the "forRoot pattern" (see [Angular's official documentation](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) for details: in a nutshell, when you need a service to be global under all circumstances, you cannot risk it to be included in modules that are lazy loaded, otherwise the lazy loaded module will be provided of a copy of the original service).
 
+So, if you follow the Angular best practice and have your own `CoreModule`, that's the best place to configure AngularAbTests:
 
-metti esempio di codice con import e reexport. AZO ASSICURATI CHE RE-EXPIRT SERVA VERAMENTE CAZZO eventualmente toglilo da tests module; in core module non ce l'ho ma sì ce l'ho in tests module, è veramente necessario??
+```javascript
+@NgModule({
+  imports: [
+    SomeModuleWithProviders,
+    AnotherModuleWithProviders,
+    AbTestsModule.forRoot([
+      {
+        // Configuration for the first test
+      },
+      {
+        // Configuration for the second test
+      },
+      // etc
+    ]),
+  ],
+})
+export class CoreModule {
+  // Content of the CoreModule, usually a guard against double loading
+}
+```
 
-scrivi che se il test è molto grande puoi rifattorizzarlo blabla e metti codice
+If you are setting up a lot of tests, you might want to clean up your `CoreModule` and extract the AngularAbTests logic into a separate one. Create a separate file called `tests.module.ts`:
+
+```javascript
+import { NgModule } from '@angular/core';
+import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/angular-ab-tests.module'; // TODO
+
+export const abTestsOptions: AbTestOptions[] = [
+  {
+    // Configuration for the first test
+  },
+  {
+    // Configuration for the second test
+  },
+  // etc
+];
+
+@NgModule({
+  imports: [
+    AbTestsModule.forRoot(abTestsOptions),
+  ],
+})
+export class TestsModule {}
+```
+
+
+[MANCA IMPORT]
+
+
+
+
+
 
 poi scrivi shared module
 
