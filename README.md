@@ -8,6 +8,7 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 - [Quick introduction to usage](https://github.com/adrdilauro/angular-ab-tests#usage-in-short)
 - [Why this plugin is good for you](https://github.com/adrdilauro/angular-ab-tests#why-to-use-this-plugin)
 - [How to set up a quick demo to play around](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo)
+- [How to run the full specs](https://github.com/adrdilauro/angular-ab-tests#run-the-full-specs)
 - [Full documentation part 1: Initializing](https://github.com/adrdilauro/angular-ab-tests#documentation-1-initializing)
 - [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage)
 - [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation-3-tips)
@@ -66,7 +67,6 @@ Wrap fragments of HTML inside the structural directive named `abTestVersions`, m
 
 # Why to use this plugin
 
-
 You can create several different versions, as complex and as big as you need, without filling your HTML with unnecessary code. This will make your A/B test less error prone, and also it will make it easier to remove the loser versions after the test, because the code is clear and descriptive.
 
 Versions that are not selected are automatically removed from change detection at initialization, so no performance issues.
@@ -95,10 +95,14 @@ You can setup a simple demo to play around with the plugin and see how it works:
 1. `git clone git@github.com:adrdilauro/angular-ab-tests.git`
 2. Navigate to the folder `/demo`
 3. `npm install`
-4. `ng test` if you want to run the Karma specs
-5. `ng serve`
+4. `ng serve`
 
 The demo contains a simple A/B test serving two different components depending on the chosen version. You can play around, add more tests / versions, and explore all the configuration options.
+
+
+# Run the full specs
+
+Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/angular-ab-tests/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo), then run `ng test` in your console. TODO
 
 
 # Documentation 1: Initializing
@@ -130,7 +134,9 @@ export class AppModule {}
 
 I'll soon explain in detail (see [Documentation 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage)) both the usage of the directive and the options available in each configuration object. Before coming to that, I want to give some practical tips about the set up process.
 
-### Best practice for setting up AngularAbTests
+## Best practice for setting up AngularAbTests
+
+### 1 - Set up the root import
 
 The best way to set up AngularAbTests is to include the `forRoot` call in your `CoreModule`, this is called the "forRoot pattern" (see [Angular's official documentation](https://angular.io/guide/ngmodule#configure-core-services-with-coremoduleforroot) for details: in a nutshell, when you need a service to be global under all circumstances, you cannot risk it to be included in modules that are lazy loaded, otherwise the lazy loaded module will be provided of a copy of the original service).
 
@@ -161,7 +167,7 @@ If you are setting up a lot of tests, you might want to clean up your `CoreModul
 
 ```javascript
 import { NgModule } from '@angular/core';
-import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/angular-ab-tests.module'; // TODO
+import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/module'; // TODO
 
 export const abTestsOptions: AbTestOptions[] = [
   {
@@ -181,30 +187,39 @@ export const abTestsOptions: AbTestOptions[] = [
 export class TestsModule {}
 ```
 
-In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/angular-ab-tests.module`. Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
+In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. TODO Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
 
 To complete your refactoring, you then import your `TestsModule` into `CoreModule`:
 
 ```javascript
-
-
-
+@NgModule({
+  imports: [
+    SomeModuleWithProviders,
+    AnotherModuleWithProviders,
+    TestsModule,
+  ],
+})
+export class CoreModule {
+  // Content of the CoreModule, usually a guard against double loading
+}
 ```
 
+### 2 - Set up the directive
 
+The best place to set up the directive `*abTestVersions` is the `SharedModule`, in order not to accidentallly forget to import it in every single module. Shared modules are [a recommended way to organize your shared dependencies](https://angular.io/guide/ngmodule#shared-modules).
 
+Simply configure your `SharedModule` to import and re-export the bare `AbTestsModule`, like this:
 
+```
+@NgModule({
+  imports: [ AbTestsModule ],
+  exports: [ AbTestsModule ],
+})
+export class SharedModule {}
+```
 
+[manca link a demo per vedere tutto questo in action + anche link a lista di moduli globale di docs, tutti i tipi]
 
-poi scrivi shared module
-
-infine metti link a lista di moduli tipici da angular.io
-
-
-
-metti prima forRoot e directive structural (con link a angular guide)
-usage metti link below anchor
-poi spiega il mio modo ideale con link a demo e anche codice lì
 
 
 # Documentation 2: Usage
