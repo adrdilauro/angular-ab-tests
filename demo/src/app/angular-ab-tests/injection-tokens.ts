@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { AbTestOptions } from './angular-ab-tests.module';
-import { CookieHandler, CrawlerDetector, RandomExtractor } from './angular-ab-tests.classes';
+import { AbTestOptions } from './module';
+import { CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
 
 export const CONFIG = new InjectionToken<AbTestOptions[]>('ANGULAR_AB_TEST_CONFIG');
 export const COOKIE_HANDLER = new InjectionToken<CookieHandler>('ANGULAR_AB_TEST_COOKIE_HANDLER');

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AbTestsModule } from './angular-ab-tests/angular-ab-tests.module';
+import { AbTestsModule } from './angular-ab-tests/module';
 
 @NgModule({
   imports: [ AbTestsModule ],

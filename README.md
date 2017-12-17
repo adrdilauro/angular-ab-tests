@@ -181,8 +181,15 @@ export const abTestsOptions: AbTestOptions[] = [
 export class TestsModule {}
 ```
 
+In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/angular-ab-tests.module`. Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
 
-[MANCA IMPORT]
+To complete your refactoring, you then import your `TestsModule` into `CoreModule`:
+
+```javascript
+
+
+
+```
 
 
 

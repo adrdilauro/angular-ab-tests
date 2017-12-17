@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { AbTestsModule } from './angular-ab-tests.module';
-import { AbTestVersionDirective } from './angular-ab-tests.directive';
-import { COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './angular-ab-tests.injection-tokens';
+import { AbTestsModule } from './module';
+import { AbTestVersionDirective } from './directive';
+import { COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './injection-tokens';
 
 @Component({
   template: `

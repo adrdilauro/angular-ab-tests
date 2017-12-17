@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { AbTestOptions } from './angular-ab-tests.module';
-import { AbTestForRealUser, AbTestForCrawler, CookieHandler, CrawlerDetector, RandomExtractor } from './angular-ab-tests.classes';
-import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './angular-ab-tests.injection-tokens';
-import { error } from './angular-ab-tests.error';
+import { AbTestOptions } from './module';
+import { AbTestForRealUser, AbTestForCrawler, CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
+import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './injection-tokens';
+import { error } from './error';
 
 export const COOKIE_NAMESPACE = 'angular-ab-tests';
 
