@@ -52,7 +52,7 @@ Set up an A/B test including the module with `forRoot` method:
 })
 ```
 
-Wrap fragments of HTML inside the structural directive named `abTestVersions`, marking them to belong to one or more of the versions of your A/B test.
+Wrap fragments of HTML inside the structural directive named `abTestVersion`, marking them to belong to one or more of the versions of your A/B test.
 
 ```html
 <ng-container *abTestVersion="'old'">
@@ -206,7 +206,7 @@ export class CoreModule {
 
 ### 2 - Set up the directive
 
-The best place to set up the directive `*abTestVersions` is the `SharedModule`, in order not to accidentallly forget to import it in every single module. Shared modules are [a recommended way to organize your shared dependencies](https://angular.io/guide/ngmodule#shared-modules).
+The best place to set up the directive `*abTestVersion` is the `SharedModule`, in order not to accidentallly forget to import it in every single module. Shared modules are [a recommended way to organize your shared dependencies](https://angular.io/guide/ngmodule#shared-modules).
 
 Simply configure your `SharedModule` to import and re-export the bare `AbTestsModule`, like this:
 
@@ -288,7 +288,7 @@ AbTestsModule.forRoot(
 
 ### The directive
 
-The directive `abTestVersions` wraps a portion of HTML and decides whether showing it or not depending on the following factors:
+The directive `abTestVersion` wraps a portion of HTML and decides whether showing it or not depending on the following factors:
 
 1. Does the version stored in the cookie match the one declared in the directive?
 2. If the call comes from an SEO crawler, has this version been chosen to be shown to crawlers?
@@ -296,7 +296,7 @@ The directive `abTestVersions` wraps a portion of HTML and decides whether showi
 This is the most basic implementation of the directive:
 
 ```html
-<ng-container *abTestVersions="'v1';scope:'default'">
+<ng-container *abTestVersion="'v1';scope:'default'">
   <!-- Content -->
 </ng-container>
 ```
@@ -304,7 +304,7 @@ This is the most basic implementation of the directive:
 The "scope" is necessary to map to the correct test if you set up more than one: if you are pointing to the default test, you can omit the scope, like this:
 
 ```html
-<ng-container *abTestVersions="'v1'">
+<ng-container *abTestVersion="'v1'">
   <!-- Content -->
 </ng-container>
 ```
@@ -312,19 +312,19 @@ The "scope" is necessary to map to the correct test if you set up more than one:
 You can associate one block of HTML to two versions: instead of writing the directive twice,
 
 ```html
-<ng-container *abTestVersions="'v1'">
+<ng-container *abTestVersion="'v1'">
   <!-- Content -->
 </ng-container>
 
-<ng-container *abTestVersions="'v2'">
+<ng-container *abTestVersion="'v2'">
   <!-- Very same content -->
 </ng-container>
 ```
 
-you can simply declare the `abTestVersions` directive once, separating versions with a comma:
+you can simply declare the `abTestVersion` directive once, separating versions with a comma:
 
 ```html
-<ng-container *abTestVersions="'v1,v2'">
+<ng-container *abTestVersion="'v1,v2'">
   <!-- Content -->
 </ng-container>
 ```
@@ -334,7 +334,7 @@ Versions should be separated by comma without spaces; however don't worry too mu
 As I have already said, in the configuration you can specify that a version is always going to be shown to SEO crawlers; you can do this at directive level as well, forcing a specific block to be shown to crawlers, regardless of how you had set that test up:
 
 ```html
-<ng-container *abTestVersions="'v1';forCrawlers:true">
+<ng-container *abTestVersion="'v1';forCrawlers:true">
   <!-- Content -->
 </ng-container>
 ```
@@ -356,19 +356,19 @@ The HTML tag `<ng-container>` is an empty tag that is not rendered, it's used on
 
 ```html
 <!-- Recommended implementation -->
-<ng-container *abTestVersions="'old'">
+<ng-container *abTestVersion="'old'">
   <component-for-version-old>
   </component-for-version-old>
 </ng-container>
 
 <!-- Not recommended because you render an unnecessary div -->
-<div *abTestVersions="'old'">
+<div *abTestVersion="'old'">
   <component-for-version-old>
   </component-for-version-old>
 </div>
 
 <!-- Not recommended because you are mixing the logics of your AB test with the logic of your app -->
-<component-for-version-old *abTestVersions="'old'">
+<component-for-version-old *abTestVersion="'old'">
 </component-for-version-old>
 ```
 
@@ -378,12 +378,12 @@ As already mentioned, change detection is disabled for anything contained in a v
 
 ```html
 <!-- Recommended implementation -->
-<div *abTestVersions="'old'">
+<div *abTestVersion="'old'">
   <!-- Content -->
 </div>
 
 <!-- Not recommended because "getOldVersion()" will be fired at every change detection tick -->
-<div *abTestVersions="getOldVersion()">
+<div *abTestVersion="getOldVersion()">
   <!-- Content -->
 </div>
 ```
@@ -394,8 +394,8 @@ You should keep your code logic clean and easy to debug: be careful not to nest 
 
 ```html
 <!-- Not recommended -->
-<ng-container *abTestVersions="'old'">
-  <ng-container *abTestVersions="'new'">
+<ng-container *abTestVersion="'old'">
+  <ng-container *abTestVersion="'new'">
 
   </ng-container>
 </ng-container>
@@ -405,14 +405,14 @@ In theory, if you nest directives associated to different tests, you are not doi
 
 ```html
 <!-- In principle this is not wrong, but the results of your tests might not come out consistent -->
-<ng-container *abTestVersions="'old';scope:'firsttest'">
-  <ng-container *abTestVersions="'new';scope:'secondtest'">
+<ng-container *abTestVersion="'old';scope:'firsttest'">
+  <ng-container *abTestVersion="'new';scope:'secondtest'">
 
   </ng-container>
 </ng-container>
 ```
 
-**So, better not to nest two directives of type `abTestVersions`.**
+**So, better not to nest two directives of type `abTestVersion`.**
 
 How to be sure that you are not nesting two directives? Unfortunately with the decomposition of an HTML page into Angular components there is no definitive way of ensuring this, you'll have to organize your code smartly.
 
