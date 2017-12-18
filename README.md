@@ -412,7 +412,7 @@ In theory, if you nest directives associated to different tests, you are not doi
 </ng-container>
 ```
 
-**So, better not to nest two directives of type `abTestVersion`.**
+**So, better not to nest two directives of type `abTestVersions`.**
 
 How to be sure that you are not nesting two directives? Unfortunately with the decomposition of an HTML page into Angular components there is no definitive way of ensuring this, you'll have to organize your code smartly.
 
