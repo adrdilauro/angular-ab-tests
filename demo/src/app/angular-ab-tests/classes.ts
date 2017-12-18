@@ -35,12 +35,20 @@ export class AbTestForCrawler {
 
 export class RandomExtractor {
   private _weights: [number, string][];
+  private _versions: string[];
 
   setWeights(weights: [number, string][]) {
     this._weights = weights;
   }
 
+  setVersions(versions: string[]) {
+    this._versions = versions;
+  }
+
   run(): string {
+    if (this._weights === undefined) {
+      return this._versions[Math.floor(Math.random() * this._versions.length)];
+    }
     let random: number = Math.random() * 100;
     for (let weight of this._weights) {
       if (random <= weight[0]) {

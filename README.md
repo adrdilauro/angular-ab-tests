@@ -218,13 +218,77 @@ Simply configure your `SharedModule` to import and re-export the bare `AbTestsMo
 export class SharedModule {}
 ```
 
-[manca link a demo per vedere tutto questo in action + anche link a lista di moduli globale di docs, tutti i tipi]
+To see quickly this whole configuration in action, [please set up the demo](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo).
+
+To read more about `SharedModule` and `CoreModule`, you might find useful [this list of module patterns from the official docs](https://angular.io/guide/ngmodule-faq#feature-modules).
 
 
 
 # Documentation 2: Usage
 
-tutti I casi
+### The config interface
+
+This is how the configuration `AbTestOptions` is defined:
+
+```javascript
+export interface AbTestOptions {
+  versions: string[];
+  scope?: string;
+  versionForCrawlers?: string;
+  expiration?: number;
+  domain?: string;
+  weights?: {
+    [x: string]: number,
+  };
+}
+```
+
+When you setup the module using `forRoot`, you have to pass as argument **an array of objects that respect this interface**. Let's go over all the options:
+
+- `versions`: all the versions that your test is going to use (an array of strings): in order not to get confused, better using alphanumeric trimmed strings (anyway, if you accidentally mistype a version later AngularAbTests will raise an exception).
+- `scope`: if you are setting up more than one test at the same time, you have to specify a scope to distinguish them; if left undefined it will be automatically the string `'default'`. AngularAbTests will raise an exception if the same scope is used twice.
+- `versionForCrawlers`: use this field if you want one of the versions to systematically be shown to crawlers (you don't need to care about this if SEO is not important for you); of course the version needs to be one of the declared ones.
+- `expiration`: the number of days you want the cookie to persist; if left undefined the cookie will expire when the browser session ends.
+- `domain`: domain for the cookie (if left undefined it will use the standard domain).
+- `weights`: a hash of integers `< 100`, associated to the versions you have defined: use this option if you want some of your versions to appear mor frequently than the others. Weights for versions you didn't specify will be equally distributed.
+
+Examples of weight configurations for a list of versions `['v1', 'v2', 'v3']`:
+
+- `{ v1: 40 }` will produce a `40%` chance to extract `v1`, and `30%` for both the other two versions
+- `{ v1: 90, v2: 9 }` will produce a `90%` chance to extract `v1`, a `9%` to extract `v2`, and a remaining `1%` to extract `v3`
+- `{ v1: 50, v2: 55 }` will raise an exception because `50 + 55 = 105 > 100`
+- `{ v1: 40, v2: 30, v3: 35 }` will raise an exception because `40 + 30 + 35 = 105 > 100`
+- `{ v1: 40, v6: 45 }` will raise an exception because version `v6` hasn't been declared
+
+Example of a correct complete configuration
+
+```javascript
+AbTestsModule.forRoot(
+  [
+    {
+      versions: [ 'v1', 'v2', 'v3' ],
+      scope: 'versions',
+      expiration: 45,
+      weights: { v1: 45, v3: 100/3 }
+    },
+    {
+      versions: [ 'red', 'green', 'blue' ],
+      scope: 'colors',
+      versionForCrawlers: 'green',
+    },
+    {
+      versions: [ 'old', 'new' ],
+      domain: 'xxx.xxx',
+      versionForCrawlers: 'old',
+      weights: { old: 60 }
+    },
+  ]
+)
+```
+
+### The directive
+
+
 metti link a chrome cookie tool
 
 

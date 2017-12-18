@@ -91,6 +91,7 @@ export class AbTestsService {
       return chosenVersion;
     }
     this._randomExtractor.setWeights(this.processWeights(config.weights || {}, config.versions));
+    this._randomExtractor.setVersions(config.versions);
     chosenVersion = this._randomExtractor.run();
     this._cookieHandler.set(config.cookieName, chosenVersion, config.domain, config.expiration);
     return chosenVersion;
@@ -110,6 +111,9 @@ export class AbTestsService {
       totalWeight += this.roundFloat(weights[key]);
       processedWeights.push([totalWeight, key]);
     }
+    if (index === undefined) {
+      return undefined;
+    }
     if (totalWeight >= 100) {
       error('Sum of weights is <' + totalWeight + '>, while it should be less than 100');
     }
@@ -123,6 +127,6 @@ export class AbTestsService {
   }
 
   private roundFloat(x: number): number {
-    return Math.round(x * 10) / 10;
+    return Math.round(x * 1000) / 1000;
   }
 }
