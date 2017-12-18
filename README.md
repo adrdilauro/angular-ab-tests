@@ -288,6 +288,54 @@ AbTestsModule.forRoot(
 
 ### The directive
 
+The directive `abTestVersions` wraps a portion of HTML and decides whether showing it or not depending on the following factors:
+
+1. Does the version stored in the cookie match the one declared in the directive?
+2. If the call comes from an SEO crawler, has this version been chosen to be shown to crawlers?
+
+This is the most basic implementation of the directive:
+
+```html
+<ng-container *abTestVersions="'v1';scope:'default'">
+  <!-- Content -->
+</ng-container>
+```
+
+The "scope" is necessary to map to the correct test if you set up more than one: if you are pointing to the default test, you can omit the scope, like this:
+
+```html
+<ng-container *abTestVersions="'v1'">
+  <!-- Content -->
+</ng-container>
+```
+
+You can associate one block of HTML to two versions: instead of writing the directive twice,
+
+```html
+<ng-container *abTestVersions="'v1'">
+  <!-- Content -->
+</ng-container>
+
+<ng-container *abTestVersions="'v2'">
+  <!-- Very same content -->
+</ng-container>
+```
+
+you can simply declare the `abTestVersions` directive once, separating versions with a comma:
+
+```html
+<ng-container *abTestVersions="'v1,v2'">
+  <!-- Content -->
+</ng-container>
+```
+
+Versions should be separated by comma without spaces; however don't worry too much about mistyping, because if you accidentally add a space AngularAbTests will realise one of your versions doesn't match any of the declared ones, and raise an exception.
+
+
+
+[MANCA FORCRAWLERS]
+
+[AVVISO CHE SE NON METTO FOR CRAWLERS PER NIENTE NESSUNA VERSION WILL APPEAR TO CRAWLERS!]
 
 metti link a chrome cookie tool
 
