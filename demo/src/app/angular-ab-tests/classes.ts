@@ -45,13 +45,9 @@ export class RandomExtractor {
     this._versions = versions;
   }
 
-  getFromShuffledArray() {
-    return this._versions[Math.floor(Math.random() * this._versions.length)];
-  }
-
   run(): string {
     if (this._weights === undefined) {
-      return this.getFromShuffledArray();
+      return this._versions[Math.floor(Math.random() * this._versions.length)];
     }
     let random: number = Math.random() * 100;
     for (let weight of this._weights) {

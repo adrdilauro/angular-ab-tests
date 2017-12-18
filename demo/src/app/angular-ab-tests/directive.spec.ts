@@ -41,7 +41,6 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
       setVersions: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setVersions').and.callFake(function(versions) {
         randomizedIndex = randomized.indexOf(versions[0]);
       }),
-      getFromShuffledArray: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'getFromShuffledArray'),
       run: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'run').and.callFake(function(cookieName) {
         return randomized[randomizedIndex];
       }),
