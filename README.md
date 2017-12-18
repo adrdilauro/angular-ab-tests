@@ -349,3 +349,74 @@ I strongly suggest you to use the Chrome extension called [EditThisCookie](https
 
 
 # Documentation 3: Tips
+
+### 1 - Apply the directive on a ngContainer
+
+The HTML tag `<ng-container>` is an empty tag that is not rendered, it's used only to wrap a portion of HTML inside a structural directive. I suggest using this tag to associate a portion of HTML to an AB test version:
+
+```html
+<!-- Recommended implementation -->
+<ng-container *abTestVersions="'old'">
+  <component-for-version-old>
+  </component-for-version-old>
+</ng-container>
+
+<!-- Not recommended because you render an unnecessary div -->
+<div *abTestVersions="'old'">
+  <component-for-version-old>
+  </component-for-version-old>
+</div>
+
+<!-- Not recommended because you are mixing the logics of your AB test with the logic of your app -->
+<component-for-version-old *abTestVersions="'old'">
+</component-for-version-old>
+```
+
+### 2 - Pass only static values to the directive
+
+As already mentioned, change detection is disabled for anything contained in a version that is not rendered, so you never risk a performance issue. However, change detection is still enabled on the wrapping directive, so in order to reduce computation to the minimum possible you should pass only static values to the directive:
+
+```html
+<!-- Recommended implementation -->
+<div *abTestVersions="'old'">
+  <!-- Content -->
+</div>
+
+<!-- Not recommended because "getOldVersion()" will be fired at every change detection tick -->
+<div *abTestVersions="getOldVersion()">
+  <!-- Content -->
+</div>
+```
+
+### 3 - Better to avoid nested directives
+
+You should keep your code logic clean and easy to debug: be careful not to nest calls to directives associated to the same test, otherwise you might get unpredictable behaviours:
+
+```html
+<!-- Not recommended -->
+<ng-container *abTestVersions="'old'">
+  <ng-container *abTestVersions="'new'">
+
+  </ng-container>
+</ng-container>
+```
+
+In theory, if you nest directives associated to different tests, you are not doing anything wrong; however, there is a high chance that if you are doing that the statistical results of your tests [will clash](https://github.com/adrdilauro/angular-ab-tests#4-ensure-your-tests-are-statistically-consistent).
+
+```html
+<!-- In principle this is not wrong, but the results of your tests might not come out consistent -->
+<ng-container *abTestVersions="'old';scope:'firsttest'">
+  <ng-container *abTestVersions="'new';scope:'secondtest'">
+
+  </ng-container>
+</ng-container>
+```
+
+So, better not to nest two directives of type `abTestVersion`.
+
+How to be sure that you are not nesting two directives? Unfortunately with the decomposition of an HTML page into Angular components there is no definitive way of ensuring this, you'll have to organize your code smartly.
+
+
+### 4 - Ensure your tests are statistically consistent
+
+Be careful not to produce a false positive by running two AB tests in the same time: there are many blogs covering this topic, for instance one I found is [this](https://conversionxl.com/blog/can-you-run-multiple-ab-tests-at-the-same-time).
