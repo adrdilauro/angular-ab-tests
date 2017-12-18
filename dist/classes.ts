@@ -55,6 +55,7 @@ export class RandomExtractor {
         return weight[1];
       }
     }
+    return this._versions[0];
   }
 }
 
