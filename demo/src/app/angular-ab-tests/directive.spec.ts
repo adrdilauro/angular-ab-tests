@@ -37,9 +37,11 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
       set: spyOn(TestBed.get(COOKIE_HANDLER), 'set'),
     },
     randomExtractor: {
-      setWeights: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setWeights').and.callFake(function(weights) {
-        randomizedIndex = randomized.indexOf(weights[0][1]);
+      setWeights: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setWeights'),
+      setVersions: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setVersions').and.callFake(function(versions) {
+        randomizedIndex = randomized.indexOf(versions[0]);
       }),
+      getFromShuffledArray: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'getFromShuffledArray'),
       run: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'run').and.callFake(function(cookieName) {
         return randomized[randomizedIndex];
       }),
@@ -56,19 +58,13 @@ let testCall = {
       expect(args.length).toBe(3);
       expect(args[0][0]).toBe(45);
       expect(args[0][1]).toBe('v1');
-      expect(args[1][0]).toBe(78.3);
+      expect(args[1][0]).toBe(78.333);
       expect(args[1][1]).toBe('v3');
       expect(args[2][0]).toBe(100);
       expect(args[2][1]).toBe('v2');
     },
     colors: function(args) {
-      expect(args.length).toBe(3);
-      expect(args[0][0]).toBe(33.3);
-      expect(args[0][1]).toBe('red');
-      expect(args[1][0]).toBe(66.6);
-      expect(args[1][1]).toBe('green');
-      expect(args[2][0]).toBe(100);
-      expect(args[2][1]).toBe('blue');
+      expect(args).toBe(undefined);
     },
     default: function(args) {
       expect(args.length).toBe(2);
@@ -119,7 +115,6 @@ let testCallsSetCookie = function(calls, toExpect) {
 
 describe('Directive: AbTestVersion', () => {
   let fixture: ComponentFixture<TestAbTestVersionsComponent>;
-  let spyCookieHandlerGet, spyCookieHandlerSet, spyRandomExtractorSetWeights, spyRandomExtractorRun, spyCrawlerDetector;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
