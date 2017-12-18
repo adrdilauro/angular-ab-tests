@@ -401,7 +401,7 @@ You should keep your code logic clean and easy to debug: be careful not to nest 
 </ng-container>
 ```
 
-In theory, if you nest directives associated to different tests, you are not doing anything wrong; however, there is a high chance that if you are doing that the statistical results of your tests [will clash](https://github.com/adrdilauro/angular-ab-tests#4-ensure-your-tests-are-statistically-consistent).
+In theory, if you nest directives associated to different tests, you are not doing anything wrong; however, there is a high chance that if you are doing that the statistical results of your tests [will clash](https://github.com/adrdilauro/angular-ab-tests#4---ensure-your-tests-are-statistically-consistent).
 
 ```html
 <!-- In principle this is not wrong, but the results of your tests might not come out consistent -->
