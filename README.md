@@ -331,13 +331,21 @@ you can simply declare the `abTestVersions` directive once, separating versions 
 
 Versions should be separated by comma without spaces; however don't worry too much about mistyping, because if you accidentally add a space AngularAbTests will realise one of your versions doesn't match any of the declared ones, and raise an exception.
 
+As I have already said, in the configuration you can specify that a version is always going to be shown to SEO crawlers; you can do this at directive level as well, forcing a specific block to be shown to crawlers, regardless of how you had set that test up:
 
+```html
+<ng-container *abTestVersions="'v1';forCrawlers:true">
+  <!-- Content -->
+</ng-container>
+```
 
-[MANCA FORCRAWLERS]
+Even if version `v1` wasn't configured to be shown to SEO crawlers, this specific block will be shown to crawlers.
 
-[AVVISO CHE SE NON METTO FOR CRAWLERS PER NIENTE NESSUNA VERSION WILL APPEAR TO CRAWLERS!]
+Remember one thing: if you don't specify any `versionForCrawlers` in your configuration, nor add manually `forCrawlers` in any of your directives, this automatically implies that none of the versions will be rendered when a SEO crawler visits your page; but of course, if your website is an application accessible only via login, that doesn't need to worry about SEO, this would be perfectly fine.
 
-metti link a chrome cookie tool
+### Debugging cookies
+
+I strongly suggest you to use the Chrome extension called [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=en).
 
 
 # Documentation 3: Tips
