@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./lib/module","export":["AbTestsModule","AbTestOptions"]},{"from":"./lib/injection-tokens","export":["AB_TESTS_COOKIE_HANDLER_TOKEN","AB_TESTS_CRAWLER_DETECTOR_TOKEN","AB_TESTS_RANDOM_EXTRACTOR_TOKEN"]},{"from":"./lib/directive","export":["AbTestVersionDirective"]}]}]

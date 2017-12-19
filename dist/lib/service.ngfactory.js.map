@@ -1,1 +1,0 @@
-{"version":3,"file":"service.ngfactory.js","sourceRoot":"","sources":["../../lib/service.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}
