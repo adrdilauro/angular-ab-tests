@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AbTestsService } from './service';
-import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './injection-tokens';
+import { CONFIG, AB_TESTS_COOKIE_HANDLER_TOKEN, AB_TESTS_CRAWLER_DETECTOR_TOKEN, AB_TESTS_RANDOM_EXTRACTOR_TOKEN } from './injection-tokens';
 import { CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
 import { AbTestVersionDirective } from './directive';
 var AbTestsModule = (function () {
@@ -12,9 +12,9 @@ var AbTestsModule = (function () {
             providers: [
                 AbTestsService,
                 { provide: CONFIG, useValue: configs },
-                { provide: COOKIE_HANDLER, useClass: CookieHandler },
-                { provide: CRAWLER_DETECTOR, useClass: CrawlerDetector },
-                { provide: RANDOM_EXTRACTOR, useClass: RandomExtractor },
+                { provide: AB_TESTS_COOKIE_HANDLER_TOKEN, useClass: CookieHandler },
+                { provide: AB_TESTS_CRAWLER_DETECTOR_TOKEN, useClass: CrawlerDetector },
+                { provide: AB_TESTS_RANDOM_EXTRACTOR_TOKEN, useClass: RandomExtractor },
             ],
         };
     };

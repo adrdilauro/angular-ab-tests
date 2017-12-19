@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AbTestForRealUser, AbTestForCrawler, CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
-import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './injection-tokens';
+import { CONFIG, AB_TESTS_COOKIE_HANDLER_TOKEN, AB_TESTS_CRAWLER_DETECTOR_TOKEN, AB_TESTS_RANDOM_EXTRACTOR_TOKEN } from './injection-tokens';
 import { error } from './error';
 export var COOKIE_NAMESPACE = 'angular-ab-tests';
 var AbTestsService = (function () {
@@ -113,9 +113,9 @@ var AbTestsService = (function () {
     /** @nocollapse */
     AbTestsService.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: Inject, args: [CONFIG,] },] },
-        { type: CookieHandler, decorators: [{ type: Inject, args: [COOKIE_HANDLER,] },] },
-        { type: CrawlerDetector, decorators: [{ type: Inject, args: [CRAWLER_DETECTOR,] },] },
-        { type: RandomExtractor, decorators: [{ type: Inject, args: [RANDOM_EXTRACTOR,] },] },
+        { type: CookieHandler, decorators: [{ type: Inject, args: [AB_TESTS_COOKIE_HANDLER_TOKEN,] },] },
+        { type: CrawlerDetector, decorators: [{ type: Inject, args: [AB_TESTS_CRAWLER_DETECTOR_TOKEN,] },] },
+        { type: RandomExtractor, decorators: [{ type: Inject, args: [AB_TESTS_RANDOM_EXTRACTOR_TOKEN,] },] },
     ]; };
     return AbTestsService;
 }());

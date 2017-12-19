@@ -167,7 +167,7 @@ If you are setting up a lot of tests, you might want to clean up your `CoreModul
 
 ```javascript
 import { NgModule } from '@angular/core';
-import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/module';
+import { AbTestsModule, AbTestOptions } from 'angular-ab-tests';
 
 export const abTestsOptions: AbTestOptions[] = [
   {
@@ -187,7 +187,7 @@ export const abTestsOptions: AbTestOptions[] = [
 export class TestsModule {}
 ```
 
-In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. Again, for a detailed description of configuration options, see [the second part of the documentation](#documentation-2-usage).
+In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests`. Again, for a detailed description of configuration options, see [the second part of the documentation](#documentation-2-usage).
 
 To complete your refactoring, you then import your `TestsModule` into `CoreModule`:
 

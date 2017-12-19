@@ -100,9 +100,9 @@ var CookieHandler = (function () {
 }());
 
 var CONFIG = new _angular_core.InjectionToken('ANGULAR_AB_TEST_CONFIG');
-var COOKIE_HANDLER = new _angular_core.InjectionToken('ANGULAR_AB_TEST_COOKIE_HANDLER');
-var CRAWLER_DETECTOR = new _angular_core.InjectionToken('ANGULAR_AB_TEST_CRAWLER_DETECTOR');
-var RANDOM_EXTRACTOR = new _angular_core.InjectionToken('ANGULAR_AB_TEST_RANDOM_EXTRACTOR');
+var AB_TESTS_COOKIE_HANDLER_TOKEN = new _angular_core.InjectionToken('ANGULAR_AB_TEST_COOKIE_HANDLER');
+var AB_TESTS_CRAWLER_DETECTOR_TOKEN = new _angular_core.InjectionToken('ANGULAR_AB_TEST_CRAWLER_DETECTOR');
+var AB_TESTS_RANDOM_EXTRACTOR_TOKEN = new _angular_core.InjectionToken('ANGULAR_AB_TEST_RANDOM_EXTRACTOR');
 
 var COOKIE_NAMESPACE = 'angular-ab-tests';
 var AbTestsService = (function () {
@@ -215,9 +215,9 @@ var AbTestsService = (function () {
     /** @nocollapse */
     AbTestsService.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: _angular_core.Inject, args: [CONFIG,] },] },
-        { type: CookieHandler, decorators: [{ type: _angular_core.Inject, args: [COOKIE_HANDLER,] },] },
-        { type: CrawlerDetector, decorators: [{ type: _angular_core.Inject, args: [CRAWLER_DETECTOR,] },] },
-        { type: RandomExtractor, decorators: [{ type: _angular_core.Inject, args: [RANDOM_EXTRACTOR,] },] },
+        { type: CookieHandler, decorators: [{ type: _angular_core.Inject, args: [AB_TESTS_COOKIE_HANDLER_TOKEN,] },] },
+        { type: CrawlerDetector, decorators: [{ type: _angular_core.Inject, args: [AB_TESTS_CRAWLER_DETECTOR_TOKEN,] },] },
+        { type: RandomExtractor, decorators: [{ type: _angular_core.Inject, args: [AB_TESTS_RANDOM_EXTRACTOR_TOKEN,] },] },
     ]; };
     return AbTestsService;
 }());
@@ -283,9 +283,9 @@ var AbTestsModule = (function () {
             providers: [
                 AbTestsService,
                 { provide: CONFIG, useValue: configs },
-                { provide: COOKIE_HANDLER, useClass: CookieHandler },
-                { provide: CRAWLER_DETECTOR, useClass: CrawlerDetector },
-                { provide: RANDOM_EXTRACTOR, useClass: RandomExtractor },
+                { provide: AB_TESTS_COOKIE_HANDLER_TOKEN, useClass: CookieHandler },
+                { provide: AB_TESTS_CRAWLER_DETECTOR_TOKEN, useClass: CrawlerDetector },
+                { provide: AB_TESTS_RANDOM_EXTRACTOR_TOKEN, useClass: RandomExtractor },
             ],
         };
     };
@@ -305,6 +305,10 @@ var AbTestsModule = (function () {
 }());
 
 exports.AbTestsModule = AbTestsModule;
+exports.AB_TESTS_COOKIE_HANDLER_TOKEN = AB_TESTS_COOKIE_HANDLER_TOKEN;
+exports.AB_TESTS_CRAWLER_DETECTOR_TOKEN = AB_TESTS_CRAWLER_DETECTOR_TOKEN;
+exports.AB_TESTS_RANDOM_EXTRACTOR_TOKEN = AB_TESTS_RANDOM_EXTRACTOR_TOKEN;
+exports.AbTestVersionDirective = AbTestVersionDirective;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

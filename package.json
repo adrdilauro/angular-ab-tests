@@ -1,6 +1,6 @@
 {
   "name": "angular-ab-tests",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easy and descriptive way to setup complex AB tests and multivariate tests in Angular2+",
   "main": "./bundles/angular-ab-tests.umd.js",
   "module": "./angular-ab-tests.es5.js",
