@@ -1,11 +1,13 @@
-console.log('CAT');
-
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AbTestsModule } from './modules/angular-ab-tests/module';
 import { AbTestVersionDirective } from './modules/angular-ab-tests/directive';
-import { COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './modules/angular-ab-tests/injection-tokens';
+import {
+  AB_TESTS_COOKIE_HANDLER_TOKEN,
+  AB_TESTS_CRAWLER_DETECTOR_TOKEN,
+  AB_TESTS_RANDOM_EXTRACTOR_TOKEN
+} from './modules/angular-ab-tests/injection-tokens';
 
 @Component({
   template: `
@@ -26,7 +28,7 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
   let randomizedIndex = 0;
   return {
     cookieHandler: {
-      get: spyOn(TestBed.get(COOKIE_HANDLER), 'get').and.callFake(function(cookieName) {
+      get: spyOn(TestBed.get(AB_TESTS_COOKIE_HANDLER_TOKEN), 'get').and.callFake(function(cookieName) {
         switch(cookieName) {
         case 'angular-ab-tests-versions':
           return versionsCookie;
@@ -36,66 +38,66 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
           return defaultCookie;
         }
       }),
-      set: spyOn(TestBed.get(COOKIE_HANDLER), 'set'),
+      set: spyOn(TestBed.get(AB_TESTS_COOKIE_HANDLER_TOKEN), 'set'),
     },
     randomExtractor: {
-      setWeights: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setWeights'),
-      setVersions: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'setVersions').and.callFake(function(versions) {
+      setWeights: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'setWeights'),
+      setVersions: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'setVersions').and.callFake(function(versions) {
         randomizedIndex = randomized.indexOf(versions[0]);
       }),
-      run: spyOn(TestBed.get(RANDOM_EXTRACTOR), 'run').and.callFake(function(cookieName) {
+      run: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'run').and.callFake(function(cookieName) {
         return randomized[randomizedIndex];
       }),
     },
     crawlerDetector: {
-      isCrawler: spyOn(TestBed.get(CRAWLER_DETECTOR), 'isCrawler').and.returnValue(!!isCrawler),
+      isCrawler: spyOn(TestBed.get(AB_TESTS_CRAWLER_DETECTOR_TOKEN), 'isCrawler').and.returnValue(!!isCrawler),
     },
   };
 }
 
 let testCall = {
   randomExtractor: {
-    versions: function(args) {
-      expect(args.length).toBe(3);
-      expect(args[0][0]).toBe(45);
-      expect(args[0][1]).toBe('v1');
-      expect(args[1][0]).toBe(78.333);
-      expect(args[1][1]).toBe('v3');
-      expect(args[2][0]).toBe(100);
-      expect(args[2][1]).toBe('v2');
+    versions: function(arg) {
+      expect(arg.length).toBe(3);
+      expect(arg[0][0]).toBe(45);
+      expect(arg[0][1]).toBe('v1');
+      expect(arg[1][0]).toBe(78.333);
+      expect(arg[1][1]).toBe('v3');
+      expect(arg[2][0]).toBe(100);
+      expect(arg[2][1]).toBe('v2');
     },
-    colors: function(args) {
-      expect(args).toBe(undefined);
+    colors: function(arg) {
+      expect(arg.length).toBe(0);
     },
-    default: function(args) {
-      expect(args.length).toBe(2);
-      expect(args[0][0]).toBe(60);
-      expect(args[0][1]).toBe('old');
-      expect(args[1][0]).toBe(100);
-      expect(args[1][1]).toBe('new');
+    default: function(arg) {
+      expect(arg.length).toBe(2);
+      expect(arg[0][0]).toBe(60);
+      expect(arg[0][1]).toBe('old');
+      expect(arg[1][0]).toBe(100);
+      expect(arg[1][1]).toBe('new');
     },
   },
   cookieHandler: {
-    versions: function(args) {
-      expect(args.length).toBe(4);
-      expect(args[0]).toBe('angular-ab-tests-versions');
-      expect(args[1]).toBe('v1');
-      expect(args[2]).toBe(undefined);
-      expect(args[3]).toBe(45);
+    versions: function(arg) {
+      expect(arg.length).toBe(4);
+      expect(arg[0]).toBe('angular-ab-tests-versions');
+      expect(arg[1]).toBe('v1');
+      expect(arg[2]).toBe(undefined);
+      expect(arg[3]).toBe(45);
     },
-    colors: function(args) {
-      expect(args.length).toBe(4);
-      expect(args[0]).toBe('angular-ab-tests-colors');
-      expect(args[1]).toBe('red');
-      expect(args[2]).toBe(undefined);
-      expect(args[3]).toBe(undefined);
+    colors: function(arg) {
+      expect(arg.length).toBe(4);
+      expect(arg[0]).toBe('angular-ab-tests-colors');
+      expect(arg[1]).toBe('red');
+      expect(arg[2]).toBe(undefined);
+      expect(arg[3]).toBe(undefined);
     },
-    default: function(args) {
-      expect(args.length).toBe(4);
-      expect(args[0]).toBe('angular-ab-tests-default');
-      expect(args[1]).toBe('old');
-      expect(args[2]).toBe('xxx.xxx');
-      expect(args[3]).toBe(undefined);
+    default: function(arg) {
+      expect(arg.length).toBe(4);
+      expect(arg[0]).toBe('angular-ab-tests-default');
+      expect(arg[1]).toBe('old');
+      expect(arg[2]).toBe('xxx.xxx');
+      expect(arg[3]).toBe(undefined);
     },
   }
 };
