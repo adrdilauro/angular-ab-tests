@@ -106,7 +106,21 @@ The demo contains a simple A/B test serving two different components depending o
 
 # Run the full specs
 
-Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](#set-up-a-demo), then run `ng test` in your console.
+Spec file is located in [src/app/directive.spec.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/directive.spec.ts).
+
+To run the specs, first thing you have to follow the steps to [set up the demo app](#set-up-a-demo). Then, open the spec file and replace the three local `import { Something } from './modules/angular-ab-tests/filename';` with a single one, copy it from the following code snippet:
+
+```javascript
+import {
+  AbTestsModule,
+  AbTestVersionDirective,
+  AB_TESTS_COOKIE_HANDLER_TOKEN,
+  AB_TESTS_CRAWLER_DETECTOR_TOKEN,
+  AB_TESTS_RANDOM_EXTRACTOR_TOKEN
+} from 'angular-ab-tests';
+```
+
+Finally, execute `ng test` in the root folder.
 
 
 # Documentation 1: Initializing
