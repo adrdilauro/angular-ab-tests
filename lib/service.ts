@@ -21,7 +21,6 @@ export class AbTestsService {
   ) {
     this._cookieHandler = cookieHandler;
     this._randomExtractor = randomExtractor;
-    var testGeneratorIdentifier: string;
     var isCrawler: boolean = crawlerDetector.isCrawler();
     for (let config of configs) {
       let scope: string = this._defaultScope;
