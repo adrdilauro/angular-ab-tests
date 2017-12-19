@@ -1,89 +1,8 @@
 {
-  "name": "angular-ab-tests",
-  "version": "1.0.2",
-  "description": "Easy and descriptive way to setup complex AB tests and multivariate tests in Angular2+",
-  "main": "./bundles/angular-ab-tests.umd.js",
-  "module": "./angular-ab-tests.es5.js",
-  "es2015": "./angular-ab-tests.js",
-  "typings": "index.d.ts",
-  "author": "Adriano di Lauro",
-  "license": "MIT",
-  "keywords": [
-    "angular",
-    "angular2",
-    "angular 2",
-    "angular4",
-    "angular 4",
-    "angular5",
-    "angular 5",
-    "ab tests",
-    "tests",
-    "test",
-    "ab test",
-    "multivariate tests",
-    "multivariate test",
-    "multivariate",
-    "ab"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adrdilauro/angular-ab-tests.git"
-  },
-  "homepage": "https://github.com/adrdilauro/angular-ab-tests",
-  "bugs": {
-    "url": "https://github.com/adrdilauro/angular-ab-tests/issues"
-  },
-  "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3.0.0"
-  },
   "scripts": {
     "transpile": "ngc",
     "package": "rollup -c",
     "minify": "uglifyjs dist/bundles/angular-ab-tests.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/angular-ab-tests.umd.min.js",
     "build": "npm run transpile && npm run package && npm run minify"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "@angular/core": ">=2.0.0"
-  },
-  "devDependencies": {
-    "@angular/common": "^5.0.3",
-    "@angular/compiler": "^5.0.3",
-    "@angular/compiler-cli": "^5.0.3",
-    "@angular/core": "^5.0.3",
-    "@angular/platform-browser": "^5.0.3",
-    "@angular/platform-browser-dynamic": "^5.0.3",
-    "@types/jasmine": "2.5.36",
-    "@types/node": "^6.0.46",
-    "camelcase": "^4.0.0",
-    "concurrently": "3.4.0",
-    "core-js": "^2.4.1",
-    "glob": "^7.1.1",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.5.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-cli": "^1.0.1",
-    "karma-coverage": "^1.1.1",
-    "karma-edge-launcher": "^0.4.2",
-    "karma-firefox-launcher": "^1.0.1",
-    "karma-html-reporter": "^0.2.7",
-    "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^1.1.0",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-remap-coverage": "^0.1.4",
-    "karma-safari-launcher": "^1.0.0",
-    "lite-server": "^2.2.2",
-    "rimraf": "^2.6.1",
-    "rollup": "^0.42.0",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.4.1",
-    "rollup-plugin-uglify": "^2.0.1",
-    "standard-version": "^4.0.0",
-    "systemjs": "^0.19.40",
-    "tslint": "^4.4.2",
-    "typescript": "~2.4.2",
-    "zone.js": "^0.8.4"
   }
 }
