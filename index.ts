@@ -1,1 +1,1 @@
-export { AbTestsModule, AbTestOptions } from './module';
+export { AbTestsModule, AbTestOptions } from './lib/module';
