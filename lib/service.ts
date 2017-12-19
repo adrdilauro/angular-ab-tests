@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { AbTestOptions } from './module';
 import { AbTestForRealUser, AbTestForCrawler, CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
-import { CONFIG, COOKIE_HANDLER, CRAWLER_DETECTOR, RANDOM_EXTRACTOR } from './injection-tokens';
+import { CONFIG, AB_TESTS_COOKIE_HANDLER_TOKEN, AB_TESTS_CRAWLER_DETECTOR_TOKEN, AB_TESTS_RANDOM_EXTRACTOR_TOKEN } from './injection-tokens';
 import { error } from './error';
 
 export const COOKIE_NAMESPACE = 'angular-ab-tests';
@@ -15,9 +15,9 @@ export class AbTestsService {
 
   constructor(
     @Inject(CONFIG) configs: AbTestOptions[],
-    @Inject(COOKIE_HANDLER) cookieHandler: CookieHandler,
-    @Inject(CRAWLER_DETECTOR) crawlerDetector: CrawlerDetector,
-    @Inject(RANDOM_EXTRACTOR) randomExtractor: RandomExtractor
+    @Inject(AB_TESTS_COOKIE_HANDLER_TOKEN) cookieHandler: CookieHandler,
+    @Inject(AB_TESTS_CRAWLER_DETECTOR_TOKEN) crawlerDetector: CrawlerDetector,
+    @Inject(AB_TESTS_RANDOM_EXTRACTOR_TOKEN) randomExtractor: RandomExtractor
   ) {
     this._cookieHandler = cookieHandler;
     this._randomExtractor = randomExtractor;
