@@ -4,14 +4,14 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 
 ### Contents
 
-- [List of features](https://github.com/adrdilauro/angular-ab-tests#features)
-- [Quick introduction to usage](https://github.com/adrdilauro/angular-ab-tests#usage-in-short)
-- [Why this plugin is good for you](https://github.com/adrdilauro/angular-ab-tests#why-to-use-this-plugin)
-- [How to set up a quick demo to play around](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo)
-- [How to run the full specs](https://github.com/adrdilauro/angular-ab-tests#run-the-full-specs)
-- [Full documentation part 1: Initializing](https://github.com/adrdilauro/angular-ab-tests#documentation-1-initializing)
-- [Full documentation part 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage)
-- [Full documentation part 3: Tips](https://github.com/adrdilauro/angular-ab-tests#documentation-3-tips)
+- [List of features](#features)
+- [Quick introduction to usage](#usage-in-short)
+- [Why this plugin is good for you](#why-to-use-this-plugin)
+- [How to set up a quick demo to play around](#set-up-a-demo)
+- [How to run the full specs](#run-the-full-specs)
+- [Full documentation part 1: Initializing](#documentation-1-initializing)
+- [Full documentation part 2: Usage](#documentation-2-usage)
+- [Full documentation part 3: Tips](#documentation-3-tips)
 
 
 # Features
@@ -102,7 +102,7 @@ The demo contains a simple A/B test serving two different components depending o
 
 # Run the full specs
 
-Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo), then run `ng test` in your console.
+Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](#set-up-a-demo), then run `ng test` in your console.
 
 
 # Documentation 1: Initializing
@@ -132,7 +132,7 @@ The service needs to be **global**, so it needs to be initialized at root level:
 export class AppModule {}
 ```
 
-I'll soon explain in detail (see [Documentation 2: Usage](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage)) both the usage of the directive and the options available in each configuration object. Before coming to that, I want to give some practical tips about the set up process.
+I'll soon explain in detail (see [Documentation 2: Usage](#documentation-2-usage)) both the usage of the directive and the options available in each configuration object. Before coming to that, I want to give some practical tips about the set up process.
 
 ## Best practice for setting up AngularAbTests
 
@@ -187,7 +187,7 @@ export const abTestsOptions: AbTestOptions[] = [
 export class TestsModule {}
 ```
 
-In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
+In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. Again, for a detailed description of configuration options, see [the second part of the documentation](#documentation-2-usage).
 
 To complete your refactoring, you then import your `TestsModule` into `CoreModule`:
 
@@ -218,7 +218,7 @@ Simply configure your `SharedModule` to import and re-export the bare `AbTestsMo
 export class SharedModule {}
 ```
 
-To see quickly this whole configuration in action, [please set up the demo](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo).
+To see quickly this whole configuration in action, [please set up the demo](#set-up-a-demo).
 
 To read more about `SharedModule` and `CoreModule`, you might find useful [this list of module patterns from the official docs](https://angular.io/guide/ngmodule-faq#feature-modules).
 
@@ -401,7 +401,7 @@ You should keep your code logic clean and easy to debug: be careful not to nest 
 </ng-container>
 ```
 
-In theory, if you nest directives associated to different tests, you are not doing anything wrong; however, there is a high chance that if you are doing that the statistical results of your tests [will clash](https://github.com/adrdilauro/angular-ab-tests#4---ensure-your-tests-are-statistically-consistent).
+In theory, if you nest directives associated to different tests, you are not doing anything wrong; however, there is a high chance that if you are doing that the statistical results of your tests [will clash](#4---ensure-your-tests-are-statistically-consistent).
 
 ```html
 <!-- In principle this is not wrong, but the results of your tests might not come out consistent -->
