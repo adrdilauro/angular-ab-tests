@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AbTestsModule, AbTestOptions } from './angular-ab-tests/module';
+import { AbTestsModule, AbTestOptions } from 'angular-ab-tests';
 
 export const abTestsOptions: AbTestOptions[] = [
   {
