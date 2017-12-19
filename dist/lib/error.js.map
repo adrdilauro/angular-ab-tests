@@ -1,0 +1,1 @@
+{"version":3,"file":"error.js","sourceRoot":"","sources":["../../lib/error.ts"],"names":[],"mappings":"AAAA,MAAM,gBAAgB,GAAW;IAC/B,MAAM,CAAC,wBAAwB,GAAG,GAAG,CAAC,CAAC;CACxC","sourcesContent":["export function error(msg: string) {\n  throw ('AngularAbTests error: ' + msg);\n}\n"]}
