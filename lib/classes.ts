@@ -46,7 +46,7 @@ export class RandomExtractor {
   }
 
   run(): string {
-    if (this._weights === undefined) {
+    if (this._weights.length === 0) {
       return this._versions[Math.floor(Math.random() * this._versions.length)];
     }
     let random: number = Math.random() * 100;

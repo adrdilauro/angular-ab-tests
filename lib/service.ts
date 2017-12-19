@@ -22,11 +22,7 @@ export class AbTestsService {
     this._cookieHandler = cookieHandler;
     this._randomExtractor = randomExtractor;
     var testGeneratorIdentifier: string;
-    if (crawlerDetector.isCrawler()) {
-      testGeneratorIdentifier = 'setupTestForCrawler';
-    } else {
-      testGeneratorIdentifier = 'setupTestForRealUser';
-    }
+    var isCrawler: boolean = crawlerDetector.isCrawler();
     for (let config of configs) {
       let scope: string = this._defaultScope;
       if (!!config.scope) {
@@ -35,7 +31,11 @@ export class AbTestsService {
       if (!!this._tests[scope]) {
         error('Test with scope <' + scope + '> cannot be initialized twice');
       }
-      this[testGeneratorIdentifier](scope, this.filterVersions(config.versions), config);
+      if (isCrawler) {
+        this.setupTestForCrawler(scope, this.filterVersions(config.versions), config);
+      } else {
+        this.setupTestForRealUser(scope, this.filterVersions(config.versions), config);
+      }
     }
   }
 
@@ -101,7 +101,7 @@ export class AbTestsService {
     let processedWeights: [number, string][] = [];
     let totalWeight: number = 0;
     let tempVersions: string[] = versions.slice(0);
-    let index: number;
+    let index: number = -100;
     for (let key in weights) {
       index = tempVersions.indexOf(key);
       if (index === -1) {
@@ -111,8 +111,8 @@ export class AbTestsService {
       totalWeight += this.roundFloat(weights[key]);
       processedWeights.push([totalWeight, key]);
     }
-    if (index === undefined) {
-      return undefined;
+    if (index === -100) {
+      return [];
     }
     if (totalWeight >= 100) {
       error('Sum of weights is <' + totalWeight + '>, while it should be less than 100');
