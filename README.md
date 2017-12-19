@@ -94,7 +94,7 @@ You can setup a simple demo to play around with the plugin and see how it works.
 3. Delete the whole folder `src/app/modules`
 4. Execute `npm install`
 5. Execute `npm install angular-ab-tests --save`
-6. In [src/app/shared.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/shared.module.ts) and [src/app/tests.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/tests.module.ts), update imports to take symbols from npm package (rename `from './angular-ab-tests/module';` into `from 'angular-ab-tests';`)
+6. In [src/app/shared.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/shared.module.ts) and [src/app/tests.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/tests.module.ts), update imports to take symbols from npm package (rename `from './modules/angular-ab-tests/module';` into `from 'angular-ab-tests';`)
 7. Execute `ng serve`
 8. Visit `http://0.0.0.0:4200` in your browser
 
