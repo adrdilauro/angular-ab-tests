@@ -1,0 +1,39 @@
+{
+  "name": "angular-ab-tests",
+  "version": "1.0.0",
+  "description": "Easy and descriptive way to setup complex AB tests and multivariate tests in Angular2+",
+  "main": "./bundles/angular-ab-tests.umd.js",
+  "module": "./angular-ab-tests.es5.js",
+  "es2015": "./angular-ab-tests.js",
+  "typings": "index.d.ts",
+  "author": "Adriano di Lauro",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular 2",
+    "angular4",
+    "angular 4",
+    "angular5",
+    "angular 5",
+    "ab tests",
+    "tests",
+    "test",
+    "ab test",
+    "multivariate tests",
+    "multivariate test",
+    "multivariate",
+    "ab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrdilauro/angular-ab-tests.git"
+  },
+  "homepage": "https://github.com/adrdilauro/angular-ab-tests",
+  "bugs": {
+    "url": "https://github.com/adrdilauro/angular-ab-tests/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.4.0 || ^4.0.0"
+  },
+}
