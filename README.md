@@ -25,10 +25,10 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 
 # Usage in short
 
-Add it to the list of dependencies using npm: [link to npm repo] TODO
+Add it to the list of dependencies using npm: https://www.npmjs.com/package/angular-ab-tests
 
 ```
-npm install xxx # TODO
+npm install angular-ab-tests --save
 ```
 
 Set up an A/B test including the module with `forRoot` method:
@@ -102,7 +102,7 @@ The demo contains a simple A/B test serving two different components depending o
 
 # Run the full specs
 
-Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/angular-ab-tests/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo), then run `ng test` in your console. TODO
+Spec file is located [here](https://github.com/adrdilauro/angular-ab-tests/blob/master/demo/src/app/directive.spec.ts). To run the specs, follow the steps to [set up the demo app](https://github.com/adrdilauro/angular-ab-tests#set-up-a-demo), then run `ng test` in your console.
 
 
 # Documentation 1: Initializing
@@ -167,7 +167,7 @@ If you are setting up a lot of tests, you might want to clean up your `CoreModul
 
 ```javascript
 import { NgModule } from '@angular/core';
-import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/module'; // TODO
+import { AbTestsModule, AbTestOptions } from 'angular-ab-tests/module';
 
 export const abTestsOptions: AbTestOptions[] = [
   {
@@ -187,7 +187,7 @@ export const abTestsOptions: AbTestOptions[] = [
 export class TestsModule {}
 ```
 
-In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. TODO Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
+In order to clean up better your module, you can declare the configuration options separately as a constant of type `AbTestOptions[]`: type `AbTestOptions` is imported from `angular-ab-tests/module`. Again, for a detailed description of configuration options, see [the second part of the documentation](https://github.com/adrdilauro/angular-ab-tests#documentation-2-usage).
 
 To complete your refactoring, you then import your `TestsModule` into `CoreModule`:
 
