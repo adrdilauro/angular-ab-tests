@@ -67,13 +67,10 @@ Wrap fragments of HTML inside the structural directive named `abTestVersion`, ma
 
 # Why to use this plugin
 
-You can create several different versions, as complex and as big as you need, without filling your HTML with unnecessary code. This will make your A/B test less error prone, and also it will make it easier to remove the loser versions after the test, because the code is clear and descriptive.
-
-Versions that are not selected are automatically removed from change detection at initialization, so no performance issues.
-
-You can easily span your tests across different pages reading the same cookie, with no additional code.
-
-You can maintain as many different A/B tests you want without risking them to clash in the code.
+- You can create several different versions, as complex and as big as you need, without filling your HTML with unnecessary code. This will make your A/B test less error prone, and also it will make it easier to remove the loser versions after the test, because the code is clear and descriptive.
+- Versions that are not selected are automatically removed from change detection at initialization, so no performance issues.
+- You can easily span your tests across different pages reading the same cookie, with no additional code.
+- You can maintain as many different A/B tests you want without risking them to clash in the code.
 
 ### What about simple A/B tests? Why should I use AngularAbTests for a simple test as well?
 
@@ -90,7 +87,7 @@ Are you sure you want to risk this? With AngularAbTests you can set up a simple 
 
 # Set up a demo
 
-You can setup a simple demo to play around with the plugin and see how it works: the demo is in the same repository, in the folder `/demo`.
+You can setup a simple demo to play around with the plugin and see how it works.
 
 1. Execute `git clone git@github.com:adrdilauro/angular-ab-tests.git`
 2. Navigate to repository folder
