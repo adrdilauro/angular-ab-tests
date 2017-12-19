@@ -92,10 +92,14 @@ Are you sure you want to risk this? With AngularAbTests you can set up a simple 
 
 You can setup a simple demo to play around with the plugin and see how it works: the demo is in the same repository, in the folder `/demo`.
 
-1. `git clone git@github.com:adrdilauro/angular-ab-tests.git`
-2. Navigate to the folder `/demo`
-3. `npm install`
-4. `ng serve`
+1. Execute `git clone git@github.com:adrdilauro/angular-ab-tests.git`
+2. Navigate to repository folder
+3. Delete the whole folder `src/app/modules`
+4. Execute `npm install`
+5. Execute `npm install angular-ab-tests --save`
+6. In [src/app/shared.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/shared.module.ts) and [src/app/tests.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/tests.module.ts), update imports to take symbols from npm package (rename `from './angular-ab-tests/module';` into `from 'angular-ab-tests/module';`)
+7. Execute `ng serve`
+8. Visit `http://0.0.0.0:4200` in your browser
 
 The demo contains a simple A/B test serving two different components depending on the chosen version. You can play around, add more tests / versions, and explore all the configuration options.
 
