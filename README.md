@@ -96,16 +96,11 @@ You can setup a simple demo to play around with the plugin and see how it works.
 
 The demo contains a simple A/B test serving two different components depending on the chosen version. You can play around, add more tests / versions, and explore all the configuration options.
 
-**Keep in mind that in the demo `angular-ab-tests` is defined as a local module and not via npm, so if you want the demo code to work for your app you have to replace the imports from**
+**Keep in mind that in the demo `angular-ab-tests` is defined as a local module and not via npm, so if you want the demo code to work for your app you have to replace the imports:**
 
 ```javascript
-import { AbTestsModule } from './modules/angular-ab-tests/module';
-```
-
-**to**
-
-```javascript
-import { AbTestsModule } from 'angular-ab-tests';
+import { AbTestsModule } from './modules/angular-ab-tests/module'; // WRONG! Works only in the demo
+import { AbTestsModule } from 'angular-ab-tests'; // CORRECT, works when loading the module from npm
 ```
 
 AngularAbTests is fully covered by specs: spec file is located in [src/app/directive.spec.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/directive.spec.ts), to run it in the demo you have to navigate in the root folder and execute `ng test`
