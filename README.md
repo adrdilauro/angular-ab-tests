@@ -37,12 +37,10 @@ Set up an A/B test including the module with `forRoot` method:
   imports: [
     AbTestsModule.forRoot([
       {
-        {
-          versions: [ 'old', 'new' ],
-          versionForCrawlers: 'old',
-          expiration: 45,
-        },
-      }
+        versions: [ 'old', 'new' ],
+        versionForCrawlers: 'old',
+        expiration: 45,
+      },
     ]),
   ],
   exports: [

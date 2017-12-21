@@ -1,7 +1,34 @@
 {
   "name": "angular-ab-tests",
   "version": "1.0.7",
+  "description": "Easy and descriptive way to setup complex AB tests and multivariate tests in Angular2+",
+  "author": "Adriano di Lauro",
   "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular 2",
+    "angular4",
+    "angular 4",
+    "angular5",
+    "angular 5",
+    "ab tests",
+    "tests",
+    "test",
+    "ab test",
+    "multivariate tests",
+    "multivariate test",
+    "multivariate",
+    "ab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrdilauro/angular-ab-tests.git"
+  },
+  "homepage": "https://github.com/adrdilauro/angular-ab-tests",
+  "bugs": {
+    "url": "https://github.com/adrdilauro/angular-ab-tests/issues"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
