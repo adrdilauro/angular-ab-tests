@@ -1,0 +1,5 @@
+Replace "dependencies" with the following
+
+//"dependencies": {
+//  "@angular/core": ">=2.0.0"
+//},
