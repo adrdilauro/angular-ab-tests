@@ -8,7 +8,6 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 - [Quick introduction to usage](#usage-in-short)
 - [Why this plugin is good for you](#why-to-use-this-plugin)
 - [How to set up a quick demo to play around](#set-up-a-demo)
-- [How to run the full specs](#run-the-full-specs)
 - [Full documentation part 1: Initializing](#documentation-1-initializing)
 - [Full documentation part 2: Usage](#documentation-2-usage)
 - [Full documentation part 3: Tips](#documentation-3-tips)
@@ -91,33 +90,25 @@ You can setup a simple demo to play around with the plugin and see how it works.
 
 1. Execute `git clone git@github.com:adrdilauro/angular-ab-tests.git`
 2. Navigate to repository folder
-3. Delete the whole folder `src/app/modules`
-4. Execute `npm install`
-5. Execute `npm install angular-ab-tests --save`
-6. In [src/app/shared.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/shared.module.ts) and [src/app/tests.module.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/tests.module.ts), update imports to take symbols from npm package (rename `from './modules/angular-ab-tests/module';` into `from 'angular-ab-tests';`)
-7. Execute `ng serve`
-8. Visit `http://0.0.0.0:4200` in your browser
+3. Execute `npm install`
+4. Execute `ng serve`
+5. Visit `http://0.0.0.0:4200` in your browser
 
 The demo contains a simple A/B test serving two different components depending on the chosen version. You can play around, add more tests / versions, and explore all the configuration options.
 
-
-# Run the full specs
-
-Spec file is located in [src/app/directive.spec.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/directive.spec.ts).
-
-To run the specs, first thing you have to follow the steps to [set up the demo app](#set-up-a-demo). Then, open the spec file and replace the three local `import { Something } from './modules/angular-ab-tests/filename';` with a single one, copy it from the following code snippet:
+**Keep in mind that in the demo `angular-ab-tests` is defined as a local module and not via npm, so if you want the demo code to work for your app you have to replace the imports from**
 
 ```javascript
-import {
-  AbTestsModule,
-  AbTestVersionDirective,
-  AB_TESTS_COOKIE_HANDLER_TOKEN,
-  AB_TESTS_CRAWLER_DETECTOR_TOKEN,
-  AB_TESTS_RANDOM_EXTRACTOR_TOKEN
-} from 'angular-ab-tests';
+import { AbTestsModule } from './modules/angular-ab-tests/module';
 ```
 
-Finally, execute `ng test` in the root folder.
+**to**
+
+```javascript
+import { AbTestsModule } from 'angular-ab-tests';
+```
+
+AngularAbTests is fully covered by specs: spec file is located in [src/app/directive.spec.ts](https://github.com/adrdilauro/angular-ab-tests/blob/master/src/app/directive.spec.ts), to run it in the demo you have to navigate in the root folder and execute `ng test`
 
 
 # Documentation 1: Initializing
