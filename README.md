@@ -2,7 +2,7 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-# Update: version 1.1.0 has been released, here is the changelog
+### Update: version 1.1.0 has been released, here is the changelog
 
 1. Support for Angular 6
 2. Made it possible to inject the `AbTestsService` in order to retrieve the chosen version
