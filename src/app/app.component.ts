@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AbTestsService } from './modules/angular-ab-tests/service';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +19,18 @@ import { Component } from '@angular/core';
     </a>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public values = ['John Lennon', 'Ringo Starr', 'Paul McCartney', 'George Harrison'];
   public randomizedIndex: number = this.getRandomIndex();
 
+  constructor(private abTestsService: AbTestsService) {}
+
   randomizeValue() {
     this.randomizedIndex = this.getRandomIndex();
+  }
+
+  ngOnInit() {
+    console.log(this.abTestsService.getVersion());
   }
 
   private getRandomIndex() {

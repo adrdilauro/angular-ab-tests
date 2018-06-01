@@ -9,6 +9,10 @@ export class AbTestForRealUser {
     this._chosenVersion = chosenVersion;
   }
 
+  getVersion(): string {
+    return this._chosenVersion;
+  }
+
   shouldRender(versions: string[], forCrawlers: boolean): boolean {
     for (let version of versions) {
       if (this._versions.indexOf(version) === -1) {
@@ -26,6 +30,10 @@ export class AbTestForCrawler {
     if (!!version) {
       this._version = version;
     }
+  }
+
+  getVersion(): string {
+    return '';
   }
 
   shouldRender(versions: string[], forCrawlers: boolean): boolean {
