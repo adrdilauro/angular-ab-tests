@@ -2,6 +2,30 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
+#### UPDATE: VERSION 1.1.0 HAS BEEN RELEASED, HERE IS THE CHANGELOG
+
+1. **Support for Angular6**
+2. **Made it possible to inject the `AbTestsService` in order to retrieve the chosen version**
+
+```typescript
+import { Component } from '@angular/core';
+import { AbTestsService } from 'angular-ab-tests';
+
+@Component({
+  selector: '...',
+  templateUrl: '...',
+})
+export class MyComponent {
+  constructor(private abTestsService: AbTestsService) {
+    // This retrieves the version associated to default scope
+    this.abTestsService.getVersion();
+    // This retrieves the version associated to a scope different by the default one,
+    // in case you are running multiple tests
+    this.abTestsService.getVersion('my-scope');
+  }
+}
+```
+
 ### Contents
 
 - [List of features](#features)
