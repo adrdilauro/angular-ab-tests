@@ -46,6 +46,14 @@ export class AbTestsService {
     return this._tests[scopeOrDefault].getVersion();
   }
 
+  setVersion(version: string, scope?: string) {
+    let scopeOrDefault = scope || this._defaultScope;
+    if (!this._tests[scopeOrDefault]) {
+      error('Test with scope <' + scopeOrDefault + '> has not been defined');
+    }
+    this._tests[scopeOrDefault].setVersion(version);
+  }
+
   shouldRender(versions: string[], scope: string, forCrawlers: boolean): boolean {
     let scopeOrDefault = scope || this._defaultScope;
     if (!this._tests[scopeOrDefault]) {

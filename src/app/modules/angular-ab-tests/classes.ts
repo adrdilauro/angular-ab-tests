@@ -13,6 +13,13 @@ export class AbTestForRealUser {
     return this._chosenVersion;
   }
 
+  setVersion(version: string) {
+    if (this._versions.indexOf(version) === -1) {
+      error('Version <' + version + '> has not been declared: [ ' + this._versions.join(', ') + ' ]');
+    }
+    this._chosenVersion = version;
+  }
+
   shouldRender(versions: string[], forCrawlers: boolean): boolean {
     for (let version of versions) {
       if (this._versions.indexOf(version) === -1) {
@@ -35,6 +42,8 @@ export class AbTestForCrawler {
   getVersion(): string {
     return '';
   }
+
+  setVersion(version: string) {}
 
   shouldRender(versions: string[], forCrawlers: boolean): boolean {
     return forCrawlers || (!!this._version && versions.indexOf(this._version) !== -1);
