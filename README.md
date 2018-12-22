@@ -386,7 +386,7 @@ this.abTestsService.setVersion('xxx', 'my-scope');
 
 **IMPORTANT: when you use `setVersion`, the version only changes for pieces of HTML that have not been rendered yet**.
 
-**This behaviour is logical: for whatever reason are changing manually the version of a test, you don't want the change to apply to parts of the page that are already rendered, because the user would see a weird flickering.**
+**This behaviour is logical: for whatever reason you are changing manually the version of a test, you don't want the change to apply to parts of the page that are already rendered, because the user would see a weird flickering.**
 
 **So, if you want to force a version, please ensure that you do it BEFORE rendering any HTML block affected by that test.**
 
