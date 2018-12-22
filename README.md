@@ -2,7 +2,7 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-### Update: version 1.2.0 has been released, here is the changelog
+### Update: version 1.2.1 has been released, here is the changelog
 
 1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
 
@@ -383,6 +383,8 @@ this.abTestsService.setVersion('xxx'); // It raises an exception if `xxx` is not
 // in case you are running multiple tests
 this.abTestsService.setVersion('xxx', 'my-scope');
 ```
+
+**IMPORTANT:** when you use `setVersion`, the version **only changes for pieces of HTML that have not been rendered yet**. This behaviour is actually consistent with forcing a version in "real life" cases: for whatever reason you want to manually change the version of a test, you don't want the change to apply to parts of the page that are already rendered (the user would see a weird flickering). I think the version setter is mostly useful when you want a version to be consistent for certain logged users, regardless if they clear their cookies or not: in this case, all the HTML blocks affected by the test are only visible after log in.
 
 ### Debugging cookies
 
