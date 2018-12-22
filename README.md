@@ -2,10 +2,9 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-### Update: version 1.1.0 has been released, here is the changelog
+### Update: version 1.2.0 has been released, here is the changelog
 
-1. Support for Angular 6
-2. Made it possible to inject the `AbTestsService` in order to retrieve the chosen version
+1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
 
 
 ### Contents
@@ -372,11 +371,14 @@ You can then call the public methods `getVersion` and `setVersion`, specifying, 
 ```typescript
 // This retrieves the version associated to default scope
 this.abTestsService.getVersion();
+
 // This retrieves the version associated to a scope different by the default one,
 // in case you are running multiple tests
 this.abTestsService.getVersion('my-scope');
+
 // This sets the version associated to default scope
 this.abTestsService.setVersion('xxx'); // It raises an exception if `xxx` is not whitelisted
+
 // This retrieves the version associated to a scope different by the default one,
 // in case you are running multiple tests
 this.abTestsService.setVersion('xxx', 'my-scope');
