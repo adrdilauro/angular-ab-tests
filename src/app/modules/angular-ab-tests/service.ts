@@ -39,27 +39,23 @@ export class AbTestsService {
   }
 
   getVersion(scope?: string): string {
-    let scopeOrDefault = scope || this._defaultScope;
-    if (!this._tests[scopeOrDefault]) {
-      error('Test with scope <' + scopeOrDefault + '> has not been defined');
-    }
-    return this._tests[scopeOrDefault].getVersion();
+    return this.getTest(scope).getVersion();
   }
 
   setVersion(version: string, scope?: string) {
-    let scopeOrDefault = scope || this._defaultScope;
-    if (!this._tests[scopeOrDefault]) {
-      error('Test with scope <' + scopeOrDefault + '> has not been defined');
-    }
-    this._tests[scopeOrDefault].setVersion(version);
+    return this.getTest(scope).setVersion(version);
   }
 
   shouldRender(versions: string[], scope: string, forCrawlers: boolean): boolean {
+    return this.getTest(scope).shouldRender(versions, forCrawlers);
+  }
+
+  private getTest(scope?: string): AbTestForRealUser | AbTestForCrawler {
     let scopeOrDefault = scope || this._defaultScope;
     if (!this._tests[scopeOrDefault]) {
       error('Test with scope <' + scopeOrDefault + '> has not been defined');
     }
-    return this._tests[scopeOrDefault].shouldRender(versions, forCrawlers);
+    return this._tests[scopeOrDefault];
   }
 
   private filterVersions(versions: string[]): string[] {
