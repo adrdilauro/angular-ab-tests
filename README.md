@@ -384,7 +384,12 @@ this.abTestsService.setVersion('xxx'); // It raises an exception if `xxx` is not
 this.abTestsService.setVersion('xxx', 'my-scope');
 ```
 
-**IMPORTANT:** when you use `setVersion`, the version **only changes for pieces of HTML that have not been rendered yet**. This behaviour is actually consistent with forcing a version in "real life" cases: for whatever reason you want to manually change the version of a test, you don't want the change to apply to parts of the page that are already rendered (the user would see a weird flickering). I think the version setter is mostly useful when you want a version to be consistent for certain logged users, regardless if they clear their cookies or not: in this case, all the HTML blocks affected by the test are only visible after log in.
+**IMPORTANT: when you use `setVersion`, the version only changes for pieces of HTML that have not been rendered yet**.
+
+**This behaviour is logical: for whatever reason are changing manually the version of a test, you don't want the change to apply to parts of the page that are already rendered, because the user would see a weird flickering.**
+
+**So, if you want to force a version, please ensure that you do it BEFORE rendering any HTML block affected by that test.**
+
 
 ### Debugging cookies
 
