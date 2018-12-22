@@ -2,29 +2,10 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-### Update: version 1.1.0 has been released, here is the changelog
+### Update: version 1.2.0 has been released, here is the changelog
 
-1. Support for Angular 6
-2. Made it possible to inject the `AbTestsService` in order to retrieve the chosen version
+1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
 
-```typescript
-import { Component } from '@angular/core';
-import { AbTestsService } from 'angular-ab-tests';
-
-@Component({
-  selector: '...',
-  templateUrl: '...',
-})
-export class MyComponent {
-  constructor(private abTestsService: AbTestsService) {
-    // This retrieves the version associated to default scope
-    this.abTestsService.getVersion();
-    // This retrieves the version associated to a scope different by the default one,
-    // in case you are running multiple tests
-    this.abTestsService.getVersion('my-scope');
-  }
-}
-```
 
 ### Contents
 
@@ -365,6 +346,43 @@ As I have already said, in the configuration you can specify that a version is a
 Even if version `v1` wasn't configured to be shown to SEO crawlers, this specific block will be shown to crawlers.
 
 Remember one thing: if you don't specify any `versionForCrawlers` in your configuration, nor add manually `forCrawlers` in any of your directives, this automatically implies that none of the versions will be rendered when a SEO crawler visits your page; but of course, if your website is an application accessible only via login, that doesn't need to worry about SEO, this would be perfectly fine.
+
+### Manually read / set a specific version during runtime
+
+First, you need to inject the token `AbTestsService`:
+
+```typescript
+import { Component } from '@angular/core';
+import { AbTestsService } from 'angular-ab-tests';
+
+@Component({
+  selector: '...',
+  templateUrl: '...',
+})
+export class MyComponent {
+  constructor(private abTestsService: AbTestsService) {
+    //...
+  }
+}
+```
+
+You can then call the public methods `getVersion` and `setVersion`, specifying, as usual, the test scope, if you want to work on a specific test that is not the default one.
+
+```typescript
+// This retrieves the version associated to default scope
+this.abTestsService.getVersion();
+
+// This retrieves the version associated to a scope different by the default one,
+// in case you are running multiple tests
+this.abTestsService.getVersion('my-scope');
+
+// This sets the version associated to default scope
+this.abTestsService.setVersion('xxx'); // It raises an exception if `xxx` is not whitelisted
+
+// This retrieves the version associated to a scope different by the default one,
+// in case you are running multiple tests
+this.abTestsService.setVersion('xxx', 'my-scope');
+```
 
 ### Debugging cookies
 
