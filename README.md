@@ -2,7 +2,7 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-### Update: version 1.2.1 has been released, here is the changelog
+### Update: version 1.2.3 has been released, here is the changelog
 
 1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
 
