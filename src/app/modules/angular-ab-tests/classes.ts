@@ -78,7 +78,11 @@ export class RandomExtractor {
 }
 
 export class CrawlerDetector {
-  constructor(private _ssrAbstraction: AbTestSsrAbstraction) {}
+  private _ssrAbstraction: AbTestSsrAbstraction;
+
+  set ssrAbstraction(anAbstraction: AbTestSsrAbstraction) {
+    this._ssrAbstraction = anAbstraction;
+  }
 
   private _regexps: RegExp[] = [
     /bot/i, /spider/i, /facebookexternalhit/i, /simplepie/i, /yahooseeker/i, /embedly/i,
@@ -95,7 +99,11 @@ export class CrawlerDetector {
 }
 
 export class CookieHandler {
-  constructor(private _ssrAbstraction: AbTestSsrAbstraction) {}
+  private _ssrAbstraction: AbTestSsrAbstraction;
+
+  set ssrAbstraction(anAbstraction: AbTestSsrAbstraction) {
+    this._ssrAbstraction = anAbstraction;
+  }
 
   public get(name: string): string {
     name = encodeURIComponent(name);

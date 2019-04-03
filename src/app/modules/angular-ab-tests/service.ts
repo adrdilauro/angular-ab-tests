@@ -24,7 +24,9 @@ export class AbTestsService {
     @Inject(AB_TESTS_SSR_ABSTRACTION) private _ssrAbstraction: AbTestSsrAbstraction
   ) {
     this._cookieHandler = cookieHandler;
+    this._cookieHandler.ssrAbstraction = this._ssrAbstraction;
     this._randomExtractor = randomExtractor;
+    crawlerDetector.ssrAbstraction = this._ssrAbstraction;
     var isCrawler: boolean = crawlerDetector.isCrawler();
     for (let config of configs) {
       let scope: string = this._defaultScope;
