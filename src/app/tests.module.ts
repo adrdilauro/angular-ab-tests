@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AbTestsModule, AbTestOptions } from './modules/angular-ab-tests/module';
+import { AbTestsModule, AbTestOptions, AbTestSsrAbstraction } from './modules/angular-ab-tests/module';
 
 export const abTestsOptions: AbTestOptions[] = [
   {
@@ -9,9 +9,26 @@ export const abTestsOptions: AbTestOptions[] = [
   },
 ];
 
+export class SsrEmulatorOfCookieAndUserAgent implements AbTestSsrAbstraction {
+  getCookie(): string {
+    // return <string>(document.cookie);
+    return '';
+  }
+
+  setCookie(cookieString: string) {
+    // document.cookie = cookieString;
+  }
+
+  getUserAgent(): string {
+    // return <string>(window.navigator.userAgent);
+    return '':
+  }
+}
+
+
 @NgModule({
   imports: [
-    AbTestsModule.forRoot(abTestsOptions),
+    AbTestsModule.forRoot(abTestsOptions, new SsrEmulatorOfCookieAndUserAgent()),
   ],
 })
 export class TestsModule {}
