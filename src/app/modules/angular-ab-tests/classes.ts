@@ -1,4 +1,5 @@
 import { error } from './error';
+import { AbTestSsrAbstraction } from './module';
 
 export class AbTestForRealUser {
   private _versions: string[] = [];
@@ -77,6 +78,8 @@ export class RandomExtractor {
 }
 
 export class CrawlerDetector {
+  constructor(private _ssrAbstraction: AbTestSsrAbstraction) {}
+
   private _regexps: RegExp[] = [
     /bot/i, /spider/i, /facebookexternalhit/i, /simplepie/i, /yahooseeker/i, /embedly/i,
     /quora link preview/i, /outbrain/i, /vkshare/i, /monit/i, /Pingability/i, /Monitoring/i,
@@ -86,16 +89,18 @@ export class CrawlerDetector {
 
   isCrawler() {
     return this._regexps.some(function (crawler) {
-      return crawler.test(window.navigator.userAgent)
+      return crawler.test(this._ssrAbstraction.getUserAgent());
     });
   }
 }
 
 export class CookieHandler {
+  constructor(private _ssrAbstraction: AbTestSsrAbstraction) {}
+
   public get(name: string): string {
     name = encodeURIComponent(name);
     let regexp: RegExp = new RegExp('(?:^' + name + '|;\\s*' + name + ')=(.*?)(?:;|$)', 'g');
-    let results = regexp.exec(document.cookie);
+    let results = regexp.exec(this._ssrAbstraction.getCookie());
     return (!results) ? '' : decodeURIComponent(results[1]);
   }
 
@@ -108,6 +113,20 @@ export class CookieHandler {
     if (domain) {
       cookieStr += 'domain=' + domain + ';';
     }
-    document.cookie = cookieStr;
+    this._ssrAbstraction.setCookie(cookieStr);
+  }
+}
+
+export class BrowserCookieAndUserAgent implements AbTestSsrAbstraction {
+  getCookie(): string {
+    return <string>(document.cookie);
+  }
+
+  setCookie(cookieString: string) {
+    document.cookie = cookieString;
+  }
+
+  getUserAgent(): string {
+    return <string>(window.navigator.userAgent);
   }
 }

@@ -1,7 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { AbTestsService } from './service';
-import { CONFIG, AB_TESTS_COOKIE_HANDLER_TOKEN, AB_TESTS_CRAWLER_DETECTOR_TOKEN, AB_TESTS_RANDOM_EXTRACTOR_TOKEN } from './injection-tokens';
-import { CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
+import {
+  CONFIG, AB_TESTS_COOKIE_HANDLER_TOKEN, AB_TESTS_CRAWLER_DETECTOR_TOKEN,
+  AB_TESTS_RANDOM_EXTRACTOR_TOKEN, AB_TESTS_SSR_ABSTRACTION
+} from './injection-tokens';
+import { BrowserCookieAndUserAgent, CookieHandler, CrawlerDetector, RandomExtractor } from './classes';
 import { AbTestVersionDirective } from './directive';
 
 export interface AbTestOptions {
@@ -15,6 +18,12 @@ export interface AbTestOptions {
   };
 }
 
+export interface AbTestSsrAbstraction {
+  getCookie(): string;
+  setCookie(cookieString: string);
+  getUserAgent(): string;
+}
+
 @NgModule({
   declarations: [
     AbTestVersionDirective
@@ -24,7 +33,7 @@ export interface AbTestOptions {
   ],
 })
 export class AbTestsModule {
-  static forRoot(configs: AbTestOptions[]): ModuleWithProviders {
+  static forRoot(configs: AbTestOptions[], ssrAbstraction?: AbTestSsrAbstraction): ModuleWithProviders {
     return {
       ngModule: AbTestsModule,
       providers: [
@@ -33,6 +42,7 @@ export class AbTestsModule {
         { provide: AB_TESTS_COOKIE_HANDLER_TOKEN, useClass: CookieHandler },
         { provide: AB_TESTS_CRAWLER_DETECTOR_TOKEN, useClass: CrawlerDetector },
         { provide: AB_TESTS_RANDOM_EXTRACTOR_TOKEN, useClass: RandomExtractor },
+        { provide: AB_TESTS_SSR_ABSTRACTION, useValue: ssrAbstraction || new BrowserCookieAndUserAgent() },
       ],
     }
   }
