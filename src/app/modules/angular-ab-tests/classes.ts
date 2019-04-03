@@ -94,7 +94,7 @@ export class CrawlerDetector {
   isCrawler() {
     return this._regexps.some(function (crawler) {
       return crawler.test(this._ssrAbstraction.getUserAgent());
-    });
+    }.bind(this));
   }
 }
 
