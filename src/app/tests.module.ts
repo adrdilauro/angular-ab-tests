@@ -10,16 +10,16 @@ export const abTestsOptions: AbTestOptions[] = [
 ];
 
 export class SsrEmulatorOfCookieAndUserAgent implements AbTestSsrAbstraction {
-  getCookie(): string {
+  getCookie(): string { // WRITE YOUR OWN IMPLEMENTATION OF THIS
     // return <string>(document.cookie);
     return '';
   }
 
-  setCookie(cookieString: string) {
+  setCookie(cookieString: string) { // WRITE YOUR OWN IMPLEMENTATION OF THIS
     // document.cookie = cookieString;
   }
 
-  getUserAgent(): string {
+  getUserAgent(): string { // WRITE YOUR OWN IMPLEMENTATION OF THIS
     // return <string>(window.navigator.userAgent);
     return '':
   }
