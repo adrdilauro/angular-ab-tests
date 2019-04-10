@@ -3,5 +3,5 @@
   "lib": {
     "entryFile": "public_api.ts"
   },
-  "whitelistedNonPeerDependencies": ["angular", "core-js", "rxjs", "zone.js"]
+  "whitelistedNonPeerDependencies": ["angular", "core-js", "rxjs", "zone.js", "nguniversal", "ngx-utils"]
 }
