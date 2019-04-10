@@ -2,9 +2,10 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
+
 ### Update: version 1.3.0 has been released, here is the changelog
 
-1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
+1. Added support for [server side rendering](##server-side-rendering).
 
 
 ### Contents
@@ -16,6 +17,7 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 - [Full documentation part 1: Initializing](#documentation-1-initializing)
 - [Full documentation part 2: Usage](#documentation-2-usage)
 - [Full documentation part 3: Tips](#documentation-3-tips)
+- [Server side rendering](#server-side-rendering)
 
 
 # Features
@@ -476,6 +478,8 @@ There are a couple of ways to make this module work in SSR:
 
 
 ## 1 - Using `AbTestsServerModule`
+
+Thanks [@alirezamirian](https://github.com/alirezamirian) for this addition.
 
 The module `AbTestsServerModule` is an extension that overrides the services used to handle userAgent and cookies: it replaces browser entities such as `document` and `window` with SSR-friendly services that do the same thing.
 
