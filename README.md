@@ -5,7 +5,7 @@ It will **make your tests easy to debug and understand**, regardless of how comp
 
 ### Update: version 1.3.0 has been released, here is the changelog
 
-1. Added support for [server side rendering](##server-side-rendering).
+1. Added support for [server side rendering](#server-side-rendering).
 
 
 ### Contents
