@@ -468,3 +468,60 @@ How to be sure that you are not nesting two directives? Unfortunately with the d
 ### 4 - Ensure your tests are statistically consistent
 
 Be careful not to produce a false positive by running two AB tests in the same time: there are many blogs covering this topic, for instance one I found is [this](https://conversionxl.com/blog/can-you-run-multiple-ab-tests-at-the-same-time).
+
+# Documentation 4: Server Side Rendering
+
+There are a couple of ways to make this module work in SSR:
+
+## Using `AbTestsServerModule`
+import `AbTestsServerModule` into your server module:
+
+app.server.module.ts:
+```typescript
+import {NgModule} from '@angular/core';
+import {AbTestsServerModule} from 'angular-ab-tests';
+
+@NgModule({
+  imports:[
+    // ...
+    AbTestsServerModule
+  ]
+})
+export class AppServerModule {
+ //... 
+}
+```
+AbTestServerModule optionally depends on `REQUEST` from **@ngx-utils/cookies** 
+and `CookiesService` from **@ngx-utils/cookies** for detecting crawlers 
+and manipulating cookies. 
+Note that even if they are not provided, **@ngx-utils/cookies** 
+and **@ngx-utils/cookies** should be installed.
+
+## Providing necessary services
+
+You can also provide `CookieHandler` and `CrawlerDetector` services yourself 
+in your server module:
+
+app.server.module.ts:
+```typescript
+import {NgModule} from '@angular/core';
+import {CrawlerDetector, CookieHandler} from 'angular-ab-tests';
+import {MyOwnCrawlerDetector, MyOwnCookieHandler} from '...';
+
+@NgModule({
+  providers:[
+    // ...
+    {
+      provide: CrawlerDetector,
+      useClass: MyOwnCrawlerDetector
+    },
+    {
+      provide: CookieHandler,
+      useClass: MyOwnCookieHandler
+    },
+  ]
+})
+export class AppServerModule {
+ //... 
+}
+```

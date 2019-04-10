@@ -3,11 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { AbTestsModule } from './modules/angular-ab-tests/module';
 import { AbTestVersionDirective } from './modules/angular-ab-tests/directive';
-import {
-  AB_TESTS_COOKIE_HANDLER_TOKEN,
-  AB_TESTS_CRAWLER_DETECTOR_TOKEN,
-  AB_TESTS_RANDOM_EXTRACTOR_TOKEN
-} from './modules/angular-ab-tests/injection-tokens';
+import {CookieHandler, CrawlerDetector, RandomExtractor} from './modules/angular-ab-tests/classes';
 
 @Component({
   template: `
@@ -28,7 +24,7 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
   let randomizedIndex = 0;
   return {
     cookieHandler: {
-      get: spyOn(TestBed.get(AB_TESTS_COOKIE_HANDLER_TOKEN), 'get').and.callFake(function(cookieName) {
+      get: spyOn(TestBed.get(CookieHandler), 'get').and.callFake(function(cookieName) {
         switch(cookieName) {
         case 'angular-ab-tests-versions':
           return versionsCookie;
@@ -38,19 +34,19 @@ let setUpSpies = function(versionsCookie, colorsCookie, defaultCookie, isCrawler
           return defaultCookie;
         }
       }),
-      set: spyOn(TestBed.get(AB_TESTS_COOKIE_HANDLER_TOKEN), 'set'),
+      set: spyOn(TestBed.get(CookieHandler), 'set'),
     },
     randomExtractor: {
-      setWeights: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'setWeights'),
-      setVersions: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'setVersions').and.callFake(function(versions) {
+      setWeights: spyOn(TestBed.get(RandomExtractor), 'setWeights'),
+      setVersions: spyOn(TestBed.get(RandomExtractor), 'setVersions').and.callFake(function(versions) {
         randomizedIndex = randomized.indexOf(versions[0]);
       }),
-      run: spyOn(TestBed.get(AB_TESTS_RANDOM_EXTRACTOR_TOKEN), 'run').and.callFake(function(cookieName) {
+      run: spyOn(TestBed.get(RandomExtractor), 'run').and.callFake(function(cookieName) {
         return randomized[randomizedIndex];
       }),
     },
     crawlerDetector: {
-      isCrawler: spyOn(TestBed.get(AB_TESTS_CRAWLER_DETECTOR_TOKEN), 'isCrawler').and.returnValue(!!isCrawler),
+      isCrawler: spyOn(TestBed.get(CrawlerDetector), 'isCrawler').and.returnValue(!!isCrawler),
     },
   };
 }

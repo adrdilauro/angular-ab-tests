@@ -76,7 +76,7 @@ export class RandomExtractor {
   }
 }
 
-export class CrawlerDetector {
+export abstract class AbstractUserAgentCrawlerDetector {
   private _regexps: RegExp[] = [
     /bot/i, /spider/i, /facebookexternalhit/i, /simplepie/i, /yahooseeker/i, /embedly/i,
     /quora link preview/i, /outbrain/i, /vkshare/i, /monit/i, /Pingability/i, /Monitoring/i,
@@ -85,9 +85,18 @@ export class CrawlerDetector {
   ];
 
   isCrawler() {
-    return this._regexps.some(function (crawler) {
-      return crawler.test(window.navigator.userAgent)
+    return this._regexps.some((crawler) => {
+      return crawler.test(this.getUserAgentString());
     });
+  }
+
+  protected abstract getUserAgentString(): string;
+}
+
+export class CrawlerDetector extends AbstractUserAgentCrawlerDetector {
+
+  protected getUserAgentString() {
+    return window.navigator.userAgent;
   }
 }
 
