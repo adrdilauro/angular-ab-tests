@@ -474,12 +474,10 @@ Be careful not to produce a false positive by running two AB tests in the same t
 
 # Server Side Rendering
 
-There are a couple of ways to make this module work in SSR:
+There are a couple of ways to make this module work in SSR (thanks [@alirezamirian](https://github.com/alirezamirian) for this addition):
 
 
 ## 1 - Using `AbTestsServerModule`
-
-Thanks [@alirezamirian](https://github.com/alirezamirian) for this addition.
 
 The module `AbTestsServerModule` is an extension that overrides the services used to handle userAgent and cookies: it replaces browser entities such as `document` and `window` with SSR-friendly services that do the same thing.
 
