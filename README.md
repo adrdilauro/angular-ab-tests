@@ -2,7 +2,7 @@ AngularAbTests is an [angular](https://angular.io/) module that helps you settin
 
 It will **make your tests easy to debug and understand**, regardless of how complex they are, of how many versions you are setting up, or even of how many concurrent tests you are running.
 
-### Update: version 1.2.3 has been released, here is the changelog
+### Update: version 1.3.0 has been released, here is the changelog
 
 1. Added [setter](#manually-read--set-a-specific-version-during-runtime) to change the version of a specific test during runtime
 
@@ -386,9 +386,9 @@ this.abTestsService.setVersion('xxx', 'my-scope');
 
 **IMPORTANT: when you use `setVersion`, the version only changes for pieces of HTML that have not been rendered yet**.
 
-**This behaviour is logical: for whatever reason you are changing manually the version of a test, you don't want the change to apply to parts of the page that are already rendered, because the user would see a weird flickering.**
+This behaviour is logical: for whatever reason you are changing manually the version of a test, you don't want the change to apply to parts of the page that are already rendered, because the user would see a weird flickering.
 
-**So, if you want to force a version, please ensure that you do it BEFORE rendering any HTML block affected by that test: otherwise, the user might end up seeing, in the same page, HTML blocks corresponding to different versions.**
+So, if you want to force a version, please ensure that you do it BEFORE rendering any HTML block affected by that test: otherwise, the user might end up seeing, in the same page, HTML blocks corresponding to different versions.
 
 
 ### Debugging cookies
@@ -469,17 +469,22 @@ How to be sure that you are not nesting two directives? Unfortunately with the d
 
 Be careful not to produce a false positive by running two AB tests in the same time: there are many blogs covering this topic, for instance one I found is [this](https://conversionxl.com/blog/can-you-run-multiple-ab-tests-at-the-same-time).
 
-# Documentation 4: Server Side Rendering
+
+# Server Side Rendering
 
 There are a couple of ways to make this module work in SSR:
 
-## Using `AbTestsServerModule`
-import `AbTestsServerModule` into your server module:
 
-app.server.module.ts:
+## 1 - Using `AbTestsServerModule`
+
+The module `AbTestsServerModule` is an extension that overrides the services used to handle userAgent and cookies: it replaces browser entities such as `document` and `window` with SSR-friendly services that do the same thing.
+
+You need to import it in your `app.server.module.ts`, in addition to the other imports discussed in the previous points.
+
+
 ```typescript
-import {NgModule} from '@angular/core';
-import {AbTestsServerModule} from 'angular-ab-tests';
+import { NgModule } from '@angular/core';
+import { AbTestsServerModule } from 'angular-ab-tests';
 
 @NgModule({
   imports:[
@@ -487,41 +492,46 @@ import {AbTestsServerModule} from 'angular-ab-tests';
     AbTestsServerModule
   ]
 })
-export class AppServerModule {
- //... 
-}
+export class AppServerModule {}
 ```
-AbTestServerModule optionally depends on `REQUEST` from **@ngx-utils/cookies** 
-and `CookiesService` from **@ngx-utils/cookies** for detecting crawlers 
-and manipulating cookies. 
-Note that even if they are not provided, **@ngx-utils/cookies** 
-and **@ngx-utils/cookies** should be installed.
 
-## Providing necessary services
+`AbTestServerModule` optionally depends on `REQUEST` from **@ngx-utils/cookies** and `CookiesService` from **@ngx-utils/cookies** for detecting crawlers and manipulating cookies.
 
-You can also provide `CookieHandler` and `CrawlerDetector` services yourself 
-in your server module:
+Note that, even if they are not provided, **@ngx-utils/cookies** and **@ngx-utils/cookies** should be installed.
 
-app.server.module.ts:
+
+## 2 - Providing necessary services
+
+Alternatively, you can also provide `CookieHandler` and `CrawlerDetector` services yourself in your server module:
+
 ```typescript
-import {NgModule} from '@angular/core';
-import {CrawlerDetector, CookieHandler} from 'angular-ab-tests';
-import {MyOwnCrawlerDetector, MyOwnCookieHandler} from '...';
+import { NgModule } from '@angular/core';
+import { CrawlerDetector, CookieHandler } from 'angular-ab-tests';
+import { MyOwnCrawlerDetector, MyOwnCookieHandler } from '...';
 
 @NgModule({
-  providers:[
+  providers: [
     // ...
     {
       provide: CrawlerDetector,
-      useClass: MyOwnCrawlerDetector
+      useClass: MyOwnCrawlerDetector,
     },
     {
       provide: CookieHandler,
-      useClass: MyOwnCookieHandler
+      useClass: MyOwnCookieHandler,
     },
-  ]
+  ],
 })
-export class AppServerModule {
- //... 
-}
+export class AppServerModule {}
 ```
+
+The class `MyOwnCrawlerDetector` must expose a method `isCrawler(): boolean`, that, as the name suggests, returns true if the page is being visited by a crawler.
+
+The class `MyOwnCookieHandler` must expose methods `get` and `set`, with the following interfaces:
+
+```typescript
+get(name: string): string
+set(name: string, value: string, domain?: string, expires?: number): void
+```
+
+Obviously, in your own implementation of `MyOwnCookieHandler`, you don't have to worry about where the parameters `name`, `domain`, etc come from: you just need to add them to the cookie, if they are present, with whatever cookie-writing interface you are using.
