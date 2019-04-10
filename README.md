@@ -497,9 +497,9 @@ import { AbTestsServerModule } from 'angular-ab-tests';
 export class AppServerModule {}
 ```
 
-`AbTestServerModule` optionally depends on `REQUEST` from **@ngx-utils/cookies** and `CookiesService` from **@ngx-utils/cookies** for detecting crawlers and manipulating cookies.
+`AbTestServerModule` optionally depends on `REQUEST` from [@nguniversal/express-engine](https://www.npmjs.com/package/@nguniversal/express-engine) and `CookiesService` from [@ngx-utils/cookies](https://www.npmjs.com/package/@ngx-utils/cookies) for detecting crawlers and manipulating cookies.
 
-Note that, even if they are not provided, **@ngx-utils/cookies** and **@ngx-utils/cookies** should be installed.
+Note that, even if they are not provided, both modules should be installed.
 
 
 ## 2 - Providing necessary services
