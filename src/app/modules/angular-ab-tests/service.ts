@@ -125,8 +125,8 @@ export class AbTestsService {
     if (index === -100) {
       return [];
     }
-    if (totalWeight >= 100) {
-      error('Sum of weights is <' + totalWeight + '>, while it should be less than 100');
+    if (totalWeight > 100) {
+      error('Sum of weights is <' + totalWeight + '>, while it should be less than or equal to 100');
     }
     let remainingWeight: number = this.roundFloat((100 - totalWeight) / tempVersions.length);
     for (let version of tempVersions) {
