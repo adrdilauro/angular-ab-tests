@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AbTestsModule, AbTestOptions } from './modules/angular-ab-tests/module';
+import { AbTestsService } from './modules/angular-ab-tests/service';
 
 export const abTestsOptions: AbTestOptions[] = [
   {
@@ -14,4 +15,8 @@ export const abTestsOptions: AbTestOptions[] = [
     AbTestsModule.forRoot(abTestsOptions),
   ],
 })
-export class TestsModule {}
+export class TestsModule {
+  constructor(private _abTestsService: AbTestsService) {
+    this._abTestsService.setVersion('old');
+  }
+}
