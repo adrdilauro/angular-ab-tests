@@ -29,16 +29,6 @@
   "bugs": {
     "url": "https://github.com/adrdilauro/angular-ab-tests/issues"
   },
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "packagr": "ng-packagr -p ng-package.json"
-  },
-  "private": false,
   "dependencies": {
     "@angular/animations": "8.0.0",
     "@angular/common": "8.0.0",
@@ -76,5 +66,15 @@
     "ts-node": "8.2.0",
     "tslint": "5.17.0",
     "typescript": "^3.4.5"
-  }
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
+  },
+  "private": false
 }
