@@ -1,15 +1,44 @@
 {
   "name": "angular-ab-tests",
-  "version": "0.0.0",
+  "version": "1.3.1",
+  "description": "Easy and descriptive way to setup complex AB tests and multivariate tests in Angular2+",
+  "author": "Adriano di Lauro",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular6",
+    "angular 6",
+    "angular7",
+    "angular 7",
+    "angular8",
+    "angular 8",
+    "ab tests",
+    "tests",
+    "test",
+    "ab test",
+    "multivariate tests",
+    "multivariate test",
+    "multivariate",
+    "ab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrdilauro/angular-ab-tests.git"
+  },
+  "homepage": "https://github.com/adrdilauro/angular-ab-tests",
+  "bugs": {
+    "url": "https://github.com/adrdilauro/angular-ab-tests/issues"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "8.0.0",
     "@angular/common": "8.0.0",
