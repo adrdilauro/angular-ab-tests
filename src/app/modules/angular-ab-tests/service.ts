@@ -94,6 +94,7 @@ export class AbTestsService {
     versions: string[],
     cookieName: string,
     domain?: string,
+    path?: string,
     expiration?: number,
     weights?: { [x: string]: number };
   }): string {
@@ -104,7 +105,7 @@ export class AbTestsService {
     this._randomExtractor.setWeights(this.processWeights(config.weights || {}, config.versions));
     this._randomExtractor.setVersions(config.versions);
     chosenVersion = this._randomExtractor.run();
-    this._cookieHandler.set(config.cookieName, chosenVersion, config.domain, config.expiration);
+    this._cookieHandler.set(config.cookieName, chosenVersion, config.domain, config.expiration, config.path);
     return chosenVersion;
   }
 

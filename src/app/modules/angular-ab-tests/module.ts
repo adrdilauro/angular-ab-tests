@@ -7,6 +7,7 @@ import { AbTestVersionDirective } from './directive';
 export interface AbTestOptions {
   versions: string[];
   domain?: string;
+  path?: string;
   versionForCrawlers?: string;
   scope?: string;
   expiration?: number;

@@ -108,7 +108,7 @@ export class CookieHandler {
     return (!results) ? '' : decodeURIComponent(results[1]);
   }
 
-  public set(name: string, value: string, domain?: string, expires?: number) {
+  public set(name: string, value: string, domain?: string, expires?: number, path?: string) {
     let cookieStr = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';';
     if (expires) {
       let dtExpires = new Date(new Date().getTime() + expires * 1000 * 60 * 60 * 24);
@@ -116,6 +116,9 @@ export class CookieHandler {
     }
     if (domain) {
       cookieStr += 'domain=' + domain + ';';
+    }
+    if (path) {
+      cookieStr += 'path=' + path + ';';
     }
     document.cookie = cookieStr;
   }
