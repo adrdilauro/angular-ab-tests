@@ -24,7 +24,7 @@ export interface AbTestOptions {
   ],
 })
 export class AbTestsModule {
-  static forRoot(configs: AbTestOptions[]): ModuleWithProviders {
+  static forRoot(configs: AbTestOptions[]): ModuleWithProviders<AbTestsModule> {
     return {
       ngModule: AbTestsModule,
       providers: [
